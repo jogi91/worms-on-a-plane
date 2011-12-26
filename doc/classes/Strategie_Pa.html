@@ -1,0 +1,742 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>Class: Strategie_Pa</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Script-Type" content="text/javascript" />
+  <link rel="stylesheet" href=".././rdoc-style.css" type="text/css" media="screen" />
+  <script type="text/javascript">
+  // <![CDATA[
+
+  function popupCode( url ) {
+    window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+  }
+
+  function toggleCode( id ) {
+    if ( document.getElementById )
+      elem = document.getElementById( id );
+    else if ( document.all )
+      elem = eval( "document.all." + id );
+    else
+      return false;
+
+    elemStyle = elem.style;
+    
+    if ( elemStyle.display != "block" ) {
+      elemStyle.display = "block"
+    } else {
+      elemStyle.display = "none"
+    }
+
+    return true;
+  }
+  
+  // Make codeblocks hidden by default
+  document.writeln( "<style type=\"text/css\">div.method-source-code { display: none }</style>" )
+  
+  // ]]>
+  </script>
+
+</head>
+<body>
+
+
+
+    <div id="classHeader">
+        <table class="header-table">
+        <tr class="top-aligned-row">
+          <td><strong>Class</strong></td>
+          <td class="class-name-in-header">Strategie_Pa</td>
+        </tr>
+        <tr class="top-aligned-row">
+            <td><strong>In:</strong></td>
+            <td>
+                <a href="../files/lib/strategie_pa_rb.html">
+                lib/strategie_pa.rb
+                </a>
+        <br />
+            </td>
+        </tr>
+
+        <tr class="top-aligned-row">
+            <td><strong>Parent:</strong></td>
+            <td>
+                <a href="Strategie.html">
+                Strategie
+               </a>
+            </td>
+        </tr>
+        </table>
+    </div>
+  <!-- banner header -->
+
+  <div id="bodyContent">
+
+
+
+  <div id="contextContent">
+
+
+
+   </div>
+
+    <div id="method-list">
+      <h3 class="section-bar">Methods</h3>
+
+      <div class="name-list">
+      <a href="#M000041">anz_moeglichkeiten</a>&nbsp;&nbsp;
+      <a href="#M000047">direktester_weg</a>&nbsp;&nbsp;
+      <a href="#M000045">geschlossener_bereich</a>&nbsp;&nbsp;
+      <a href="#M000044">kein_naher_schlangenkopf</a>&nbsp;&nbsp;
+      <a href="#M000048">killmoeglichkeiten</a>&nbsp;&nbsp;
+      <a href="#M000039">new</a>&nbsp;&nbsp;
+      <a href="#M000042">schlangenkoepfe</a>&nbsp;&nbsp;
+      <a href="#M000046">sortieren</a>&nbsp;&nbsp;
+      <a href="#M000049">strategie_fressen</a>&nbsp;&nbsp;
+      <a href="#M000043">vektor_verschiebung</a>&nbsp;&nbsp;
+      <a href="#M000040">vorlaufige_strategie</a>&nbsp;&nbsp;
+      <a href="#M000050">wohin?</a>&nbsp;&nbsp;
+      </div>
+    </div>
+
+  </div>
+
+
+    <!-- if includes -->
+
+    <div id="section">
+
+
+
+
+
+      
+
+
+    <!-- if method_list -->
+    <div id="methods">
+      <h3 class="section-bar">Public Class methods</h3>
+
+      <div id="method-M000039" class="method-detail">
+        <a name="M000039"></a>
+
+        <div class="method-heading">
+          <a href="#M000039" class="method-signature">
+          <span class="method-name">new</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000039-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000039-source">
+<pre>
+    <span class="ruby-comment cmt"># File lib/strategie_pa.rb, line 36</span>
+36:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>
+37:                 <span class="ruby-comment cmt"># @modus: Entscheidung welche Strategie (fressen oder warten)</span>
+38:                 <span class="ruby-comment cmt"># @modus = 0: anfang des Spiels fressen</span>
+39:                 <span class="ruby-comment cmt"># @modus = 1: sobald die Schlange nicht mehr verlieren kann: warten bis zum Spielende</span>
+40:                 <span class="ruby-ivar">@modus</span> = <span class="ruby-value">0</span>
+41:                 
+42:                 <span class="ruby-comment cmt"># zählt die anzahl Züge</span>
+43:                 <span class="ruby-ivar">@zugnr</span> = <span class="ruby-value">0</span>
+44:                 <span class="ruby-comment cmt"># Anzahl der Spielschritte die das Spiel läuft</span>
+45:                 <span class="ruby-ivar">@zugmax</span> = <span class="ruby-value">3000</span>
+46:                 <span class="ruby-comment cmt"># Anzahl der Aepfel die ins Spiel kommen</span>
+47:                 <span class="ruby-ivar">@gesamtzahl_der_aepfel</span> = <span class="ruby-value">20</span>
+48:                 
+49:                 <span class="ruby-comment cmt"># Informationen ausgeben</span>
+50:                 <span class="ruby-ivar">@debug</span> = <span class="ruby-keyword kw">false</span>
+51:         <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <h3 class="section-bar">Public Instance methods</h3>
+
+      <div id="method-M000041" class="method-detail">
+        <a name="M000041"></a>
+
+        <div class="method-heading">
+          <a href="#M000041" class="method-signature">
+          <span class="method-name">anz_moeglichkeiten</span><span class="method-args">(x,y,zeitliche_entfernung)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000041-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000041-source">
+<pre>
+    <span class="ruby-comment cmt"># File lib/strategie_pa.rb, line 84</span>
+84:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">anz_moeglichkeiten</span>(<span class="ruby-identifier">x</span>,<span class="ruby-identifier">y</span>,<span class="ruby-identifier">zeitliche_entfernung</span>)
+85:                 <span class="ruby-comment cmt"># zählt die anzahl freier Felder um das Feld x,y , welches in &quot;zeitliche_entfernung&quot; Spielschritten erreicht wird</span>
+86:                 <span class="ruby-identifier">anzahlmoeglickeiten</span> = <span class="ruby-value">4</span>
+87:                 <span class="ruby-keyword kw">for</span> <span class="ruby-identifier">i</span> <span class="ruby-keyword kw">in</span> <span class="ruby-value">0</span><span class="ruby-operator">..</span><span class="ruby-value">3</span>
+88:                         <span class="ruby-identifier">vx</span>,<span class="ruby-identifier">vy</span> = <span class="ruby-identifier">i</span>.<span class="ruby-identifier">to_dir</span>
+89:                         <span class="ruby-identifier">art</span>,<span class="ruby-identifier">timer</span> = <span class="ruby-ivar">@spiel</span>[<span class="ruby-identifier">x</span><span class="ruby-operator">+</span><span class="ruby-identifier">vx</span>,<span class="ruby-identifier">y</span><span class="ruby-operator">+</span><span class="ruby-identifier">vy</span>]
+90:                         <span class="ruby-comment cmt"># wenn auf dem Feld entweder eine Schange (&gt;0) oder eine Mauer (-1) und gleichzeitig der Timer grösser als Entfernung ist (da sonst in den nächsten Zügen gelöscht) oder = 0</span>
+91:                         <span class="ruby-keyword kw">if</span> ((<span class="ruby-identifier">art</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">art</span> <span class="ruby-operator">==</span> <span class="ruby-value">-1</span>) <span class="ruby-operator">&amp;&amp;</span> (<span class="ruby-identifier">timer</span> <span class="ruby-operator">&gt;</span> <span class="ruby-identifier">zeitliche_entfernung</span><span class="ruby-operator">+</span><span class="ruby-value">1</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">timer</span> = <span class="ruby-value">0</span>))
+92:                                 <span class="ruby-identifier">anzahlmoeglickeiten</span> <span class="ruby-operator">-=</span> <span class="ruby-value">1</span>
+93:                         <span class="ruby-keyword kw">end</span>
+94:                 <span class="ruby-keyword kw">end</span>
+95:                 <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">anzahlmoeglickeiten</span>
+96:         <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000047" class="method-detail">
+        <a name="M000047"></a>
+
+        <div class="method-heading">
+          <a href="#M000047" class="method-signature">
+          <span class="method-name">direktester_weg</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000047-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000047-source">
+<pre>
+     <span class="ruby-comment cmt"># File lib/strategie_pa.rb, line 234</span>
+234:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">direktester_weg</span>
+235:                 <span class="ruby-comment cmt"># findet den direktesten Weg zum Apfel</span>
+236:                 <span class="ruby-comment cmt"># Als ziel wird der 1. Apfel im Array @spiel.aepfel genommen</span>
+237:                 <span class="ruby-identifier">ziel</span> = <span class="ruby-ivar">@spiel</span>.<span class="ruby-identifier">aepfel</span>[<span class="ruby-value">0</span>]
+238:                 
+239:                 <span class="ruby-comment cmt"># kreise um 1.ziel bis : zu viele kreise, bei meiner Schlange, bereich gefüllt</span>
+240:                 <span class="ruby-comment cmt"># in @spielfeld_kopie[x][y][3]</span>
+241:                 
+242:                 
+243:                 <span class="ruby-comment cmt"># gibt Array mit richtungen zurück die </span>
+244:                 <span class="ruby-comment cmt"># return [dir1,dir2,dir3]</span>
+245:                 <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">false</span>
+246:         <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000045" class="method-detail">
+        <a name="M000045"></a>
+
+        <div class="method-heading">
+          <a href="#M000045" class="method-signature">
+          <span class="method-name">geschlossener_bereich</span><span class="method-args">(x,y,kennnummer)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000045-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000045-source">
+<pre>
+     <span class="ruby-comment cmt"># File lib/strategie_pa.rb, line 156</span>
+156:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">geschlossener_bereich</span>(<span class="ruby-identifier">x</span>,<span class="ruby-identifier">y</span>,<span class="ruby-identifier">kennnummer</span>)
+157:                 <span class="ruby-comment cmt"># Gefahr durch abgeschlossene Bereiche bewerten, indem die Bereichgrösse berechnet wird. </span>
+158:                 <span class="ruby-comment cmt"># &quot;kennnummer&quot; wird für den Eintrag im Array @spielfeld_kopie gebrauch und muss bei jedem Aufruf anders gewählt werden, da sonst nicht richtig gezält wird</span>
+159:                 <span class="ruby-comment cmt"># @spielfeld_kopie[x][y][Attribute(=2)]</span>
+160:                 
+161:                 <span class="ruby-identifier">zu_puefende_Punkte</span> = <span class="ruby-constant">Array</span>.<span class="ruby-identifier">new</span>
+162:                 <span class="ruby-comment cmt"># die ersten vier Punkte die geprüft werden sollen</span>
+163:                 <span class="ruby-keyword kw">for</span> <span class="ruby-identifier">i</span> <span class="ruby-keyword kw">in</span> <span class="ruby-value">0</span><span class="ruby-operator">..</span><span class="ruby-value">3</span>
+164:                         <span class="ruby-identifier">testx</span>,<span class="ruby-identifier">testy</span> = <span class="ruby-identifier">vektor_verschiebung</span>(<span class="ruby-identifier">x</span>,<span class="ruby-identifier">y</span>,<span class="ruby-identifier">i</span>)
+165:                         <span class="ruby-identifier">zu_puefende_Punkte</span>.<span class="ruby-identifier">push</span>([<span class="ruby-identifier">testx</span>,<span class="ruby-identifier">testy</span>])
+166:                 <span class="ruby-keyword kw">end</span>
+167:                 
+168:                 <span class="ruby-identifier">bereichgroesse</span> = <span class="ruby-value">0</span>
+169:                 <span class="ruby-keyword kw">until</span> (<span class="ruby-identifier">zu_puefende_Punkte</span>.<span class="ruby-identifier">length</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">bereichgroesse</span> <span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@anz_freie_felder</span><span class="ruby-operator">/</span><span class="ruby-value">2</span>)                <span class="ruby-comment cmt"># bis er fertig mit scannen ist oder er schon 1/3 des gesamten freien Spielfeldes gefunden hat</span>
+170:                         <span class="ruby-identifier">punkt</span> = <span class="ruby-identifier">zu_puefende_Punkte</span>.<span class="ruby-identifier">pop</span>
+171:                         <span class="ruby-comment cmt">#if ((@spielfeld_kopie[punkt[0]][punkt[1]][0] == 0 || @spielfeld_kopie[punkt[0]][punkt[1]][0] == -2 ) &amp;&amp; kein_naher_schlangenkopf(punkt[0],punkt[1]))        # wenn das Feld frei ist und sich kein Schlangenkopf in der Nähe befindet - aus geschwindigkteitsgründen weggelassen</span>
+172:                         <span class="ruby-keyword kw">if</span> (<span class="ruby-ivar">@spielfeld_kopie</span>[<span class="ruby-identifier">punkt</span>[<span class="ruby-value">0</span>]][<span class="ruby-identifier">punkt</span>[<span class="ruby-value">1</span>]][<span class="ruby-value">0</span>] <span class="ruby-operator">==</span> <span class="ruby-value">0</span> <span class="ruby-operator">||</span> <span class="ruby-ivar">@spielfeld_kopie</span>[<span class="ruby-identifier">punkt</span>[<span class="ruby-value">0</span>]][<span class="ruby-identifier">punkt</span>[<span class="ruby-value">1</span>]][<span class="ruby-value">0</span>] <span class="ruby-operator">==</span> <span class="ruby-value">-2</span> )  <span class="ruby-comment cmt"># wenn das Feld frei ist</span>
+173:                                 <span class="ruby-comment cmt"># weiteres freies Feld im Bereich gefunden:</span>
+174:                                 <span class="ruby-comment cmt"># Punkt als gefunden eintragen</span>
+175:                                 <span class="ruby-ivar">@spielfeld_kopie</span>[<span class="ruby-identifier">punkt</span>[<span class="ruby-value">0</span>]][<span class="ruby-identifier">punkt</span>[<span class="ruby-value">1</span>]][<span class="ruby-value">2</span>] = <span class="ruby-identifier">kennnummer</span>
+176:                                 
+177:                                 <span class="ruby-comment cmt"># Bereichgrösse um 1 erhöhen</span>
+178:                                 <span class="ruby-identifier">bereichgroesse</span> <span class="ruby-operator">+=</span> <span class="ruby-value">1</span>
+179:                                 
+180:                                 <span class="ruby-comment cmt"># weitere Punkte aufschreiben,</span>
+181:                                 <span class="ruby-comment cmt"># welche NICHT SCHON GEPÜFT WORDEN SIND!!!</span>
+182:                                 <span class="ruby-keyword kw">for</span> <span class="ruby-identifier">i</span> <span class="ruby-keyword kw">in</span> <span class="ruby-value">0</span><span class="ruby-operator">..</span><span class="ruby-value">3</span>
+183:                                         <span class="ruby-identifier">testx</span>,<span class="ruby-identifier">testy</span> = <span class="ruby-identifier">vektor_verschiebung</span>(<span class="ruby-identifier">punkt</span>[<span class="ruby-value">0</span>],<span class="ruby-identifier">punkt</span>[<span class="ruby-value">1</span>],<span class="ruby-identifier">i</span>)
+184:                                         <span class="ruby-comment cmt"># wenn der Punkt noch nicht gefunden wurde</span>
+185:                                         <span class="ruby-keyword kw">if</span>(<span class="ruby-ivar">@spielfeld_kopie</span>[<span class="ruby-identifier">testx</span>][<span class="ruby-identifier">testy</span>][<span class="ruby-value">2</span>] <span class="ruby-operator">!=</span> <span class="ruby-identifier">kennnummer</span>)
+186:                                                 <span class="ruby-identifier">zu_puefende_Punkte</span>.<span class="ruby-identifier">push</span>([<span class="ruby-identifier">testx</span>,<span class="ruby-identifier">testy</span>])
+187:                                         <span class="ruby-keyword kw">end</span>
+188:                                 <span class="ruby-keyword kw">end</span>
+189:                                 
+190:                         <span class="ruby-keyword kw">end</span>
+191:                 <span class="ruby-keyword kw">end</span>
+192:                 
+193:                 <span class="ruby-identifier">rel_groesse</span> = <span class="ruby-identifier">bereichgroesse</span>.<span class="ruby-identifier">to_f</span><span class="ruby-operator">/</span><span class="ruby-ivar">@anz_freie_felder</span>.<span class="ruby-identifier">to_f</span>
+194:                 
+195:                 <span class="ruby-keyword kw">if</span> (<span class="ruby-identifier">rel_groesse</span> <span class="ruby-operator">&gt;=</span> <span class="ruby-value">1.0</span><span class="ruby-operator">/</span><span class="ruby-value">2</span>)
+196:                         <span class="ruby-identifier">gefahr</span> = <span class="ruby-value">0</span>
+197:                 <span class="ruby-keyword kw">elsif</span> (<span class="ruby-identifier">rel_groesse</span> <span class="ruby-operator">&gt;=</span> <span class="ruby-value">1.0</span><span class="ruby-operator">/</span><span class="ruby-value">3</span>)
+198:                         <span class="ruby-identifier">gefahr</span> = <span class="ruby-value">7</span>
+199:                 <span class="ruby-keyword kw">elsif</span> (<span class="ruby-identifier">rel_groesse</span> <span class="ruby-operator">&gt;=</span> <span class="ruby-value">1.0</span><span class="ruby-operator">/</span><span class="ruby-value">5</span>)
+200:                         <span class="ruby-identifier">gefahr</span> = <span class="ruby-value">16</span>
+201:                 <span class="ruby-keyword kw">elsif</span> (<span class="ruby-identifier">rel_groesse</span> <span class="ruby-operator">&gt;=</span> <span class="ruby-value">1.0</span><span class="ruby-operator">/</span><span class="ruby-value">10</span>)
+202:                         <span class="ruby-identifier">gefahr</span> = <span class="ruby-value">30</span>
+203:                 <span class="ruby-keyword kw">else</span>
+204:                         <span class="ruby-identifier">gefahr</span> = <span class="ruby-value">45</span>
+205:                 <span class="ruby-keyword kw">end</span>
+206:                 
+207:                 <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;Bereichgrösse ist #{bereichgroesse} (rel=#{rel_groesse},  GefahrBereich: #{gefahr})&quot;</span> <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@debug</span>
+208:                 <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">gefahr</span>
+209:         <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000044" class="method-detail">
+        <a name="M000044"></a>
+
+        <div class="method-heading">
+          <a href="#M000044" class="method-signature">
+          <span class="method-name">kein_naher_schlangenkopf</span><span class="method-args">(x,y)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000044-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000044-source">
+<pre>
+     <span class="ruby-comment cmt"># File lib/strategie_pa.rb, line 143</span>
+143:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">kein_naher_schlangenkopf</span>(<span class="ruby-identifier">x</span>,<span class="ruby-identifier">y</span>)
+144:                 <span class="ruby-comment cmt"># wenn um den Punkt x,y kein Schlangenkopf ist: true, sonst: false</span>
+145:                 <span class="ruby-comment cmt"># eigener Kopf wird nicht als schlangenkopf gezählt</span>
+146:                 <span class="ruby-keyword kw">if</span> (<span class="ruby-identifier">schlangenkoepfe</span>(<span class="ruby-identifier">x</span>,<span class="ruby-identifier">y</span>) <span class="ruby-operator">==</span> <span class="ruby-value">0</span>)
+147:                         <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">true</span>
+148:                         <span class="ruby-comment cmt"># kein Kopf</span>
+149:                 <span class="ruby-keyword kw">else</span>
+150:                         <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">false</span>
+151:                         <span class="ruby-comment cmt"># Schlangekopf in der Nähe</span>
+152:                 <span class="ruby-keyword kw">end</span>
+153:         <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000048" class="method-detail">
+        <a name="M000048"></a>
+
+        <div class="method-heading">
+          <a href="#M000048" class="method-signature">
+          <span class="method-name">killmoeglichkeiten</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000048-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000048-source">
+<pre>
+     <span class="ruby-comment cmt"># File lib/strategie_pa.rb, line 248</span>
+248:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">killmoeglichkeiten</span>
+249:                 <span class="ruby-comment cmt"># findet mögliche kills (z.B. weg Abschneiden)</span>
+250:                 <span class="ruby-ivar">@spiel</span>.<span class="ruby-identifier">schlangen_pos</span>.<span class="ruby-identifier">each</span> {
+251:                         <span class="ruby-operator">|</span><span class="ruby-identifier">schlange</span><span class="ruby-operator">|</span>
+252:                         
+253:                         }
+254:                 <span class="ruby-identifier">kills</span> = [<span class="ruby-keyword kw">false</span>,<span class="ruby-keyword kw">false</span>,<span class="ruby-keyword kw">false</span>,<span class="ruby-keyword kw">false</span>]
+255:                 <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">kills</span>
+256:         <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000042" class="method-detail">
+        <a name="M000042"></a>
+
+        <div class="method-heading">
+          <a href="#M000042" class="method-signature">
+          <span class="method-name">schlangenkoepfe</span><span class="method-args">(x,y)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000042-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000042-source">
+<pre>
+     <span class="ruby-comment cmt"># File lib/strategie_pa.rb, line 99</span>
+ 99:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">schlangenkoepfe</span>(<span class="ruby-identifier">x</span>,<span class="ruby-identifier">y</span>)
+100:                 <span class="ruby-comment cmt"># schätzt die Gefahr durch Schlangenköpfe für den Zug NACH Punkt x,y ein</span>
+101:                 
+102:                 <span class="ruby-identifier">wertung</span> = <span class="ruby-value">0</span>
+103:                 <span class="ruby-comment cmt"># der schlangenindex entspricht der Schlangennummer - 1</span>
+104:                 <span class="ruby-identifier">schlangenindex</span> = <span class="ruby-value">0</span>
+105:                 <span class="ruby-comment cmt"># alle Schlangen überprüfen</span>
+106:                 <span class="ruby-ivar">@spiel</span>.<span class="ruby-identifier">schlangen_pos</span>.<span class="ruby-identifier">each</span> {
+107:                         <span class="ruby-operator">|</span><span class="ruby-identifier">schlange</span><span class="ruby-operator">|</span>
+108:                         <span class="ruby-comment cmt"># wenn die Schlange noch lebt und nicht die eigene ist</span>
+109:                         <span class="ruby-keyword kw">if</span> (<span class="ruby-ivar">@spiel</span>.<span class="ruby-identifier">lebend</span>[<span class="ruby-identifier">schlangenindex</span>] <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">schlangenindex</span><span class="ruby-operator">+</span><span class="ruby-value">1</span> <span class="ruby-operator">!=</span> <span class="ruby-ivar">@nummer</span>)
+110:                                 <span class="ruby-comment cmt"># Wenn die Distanz von dem Schlangenkopf zum Richtungsfeld gleich 1 ist</span>
+111:                                 <span class="ruby-keyword kw">if</span> (((<span class="ruby-identifier">schlange</span>[<span class="ruby-value">0</span>] <span class="ruby-operator">-</span> <span class="ruby-identifier">x</span>).<span class="ruby-identifier">abs</span> <span class="ruby-operator">+</span> (<span class="ruby-identifier">schlange</span>[<span class="ruby-value">1</span>] <span class="ruby-operator">-</span> <span class="ruby-identifier">y</span>).<span class="ruby-identifier">abs</span>) <span class="ruby-operator">==</span> <span class="ruby-value">1</span>)
+112:                                         <span class="ruby-comment cmt">#puts &quot;schlangenkopf auf [#{schlange[0]},#{schlange[1]}], dir=#{schlange[2]}&quot;</span>
+113:                                         <span class="ruby-comment cmt"># Bewertung für Gefahr:</span>
+114:                                         <span class="ruby-comment cmt"># anz_moeglichkeiten(schlange[0],schlange[1],0) ist die anzahl Möglichkeiten die die gegnerische Schlange hat</span>
+115:                                         <span class="ruby-identifier">gegnerische_moeglichkeiten</span> = <span class="ruby-identifier">anz_moeglichkeiten</span>(<span class="ruby-identifier">schlange</span>[<span class="ruby-value">0</span>],<span class="ruby-identifier">schlange</span>[<span class="ruby-value">1</span>],<span class="ruby-value">0</span>)
+116:                                         <span class="ruby-keyword kw">if</span> (<span class="ruby-identifier">gegnerische_moeglichkeiten</span> <span class="ruby-operator">==</span> <span class="ruby-value">1</span>)
+117:                                                 <span class="ruby-keyword kw">return</span> <span class="ruby-value">99</span> <span class="ruby-comment cmt"># keine 100%-ige sicherheit für tod, da die gegnerische Schlange ein Fehler machen kann</span>
+118:                                         <span class="ruby-keyword kw">end</span>
+119:                                         <span class="ruby-comment cmt"># wenn gegnerische_moeglichkeiten != 1 dann sind sie entweder 2 oder 3</span>
+120:                                         <span class="ruby-identifier">wertung</span> <span class="ruby-operator">+=</span> (<span class="ruby-value">4</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">gegnerische_moeglichkeiten</span>)<span class="ruby-operator">*</span><span class="ruby-value">10</span>
+121:                                 <span class="ruby-keyword kw">end</span>
+122:                         <span class="ruby-keyword kw">end</span>
+123:                         <span class="ruby-identifier">schlangenindex</span> <span class="ruby-operator">+=</span> <span class="ruby-value">1</span>
+124:                 }
+125:                 
+126:                 <span class="ruby-comment cmt"># &gt;&gt;&gt; Reaktion auf Apfel mit Schlangen in der nähe</span>
+127:                 <span class="ruby-identifier">art</span>,<span class="ruby-identifier">timer</span> = <span class="ruby-ivar">@spiel</span>[<span class="ruby-identifier">x</span>,<span class="ruby-identifier">y</span>]
+128:                 <span class="ruby-keyword kw">if</span> (<span class="ruby-identifier">art</span> <span class="ruby-operator">==</span> <span class="ruby-value">-2</span>)        <span class="ruby-comment cmt"># wenn es ein Apfel auf dem Feld hat:</span>
+129:                         <span class="ruby-identifier">wertung</span> = (<span class="ruby-identifier">wertung</span> <span class="ruby-operator">*</span> <span class="ruby-value">1.5</span>).<span class="ruby-identifier">to_i</span>
+130:                 <span class="ruby-keyword kw">end</span>
+131:                 
+132:                 <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">wertung</span>
+133:                 <span class="ruby-comment cmt"># wertung ist zwischen 0 und 99 (wenn keine schlange in der Nähe: 0 --&gt; für Funktion kein_naher_schlangenkopf)</span>
+134:         <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000046" class="method-detail">
+        <a name="M000046"></a>
+
+        <div class="method-heading">
+          <a href="#M000046" class="method-signature">
+          <span class="method-name">sortieren</span><span class="method-args">(array)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000046-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000046-source">
+<pre>
+     <span class="ruby-comment cmt"># File lib/strategie_pa.rb, line 212</span>
+212:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">sortieren</span>(<span class="ruby-identifier">array</span>)
+213:                 <span class="ruby-identifier">anz_elemente</span> = <span class="ruby-identifier">array</span>.<span class="ruby-identifier">length</span>
+214:                 <span class="ruby-keyword kw">if</span>(<span class="ruby-identifier">anz_elemente</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>)
+215:                         <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">nil</span>
+216:                 <span class="ruby-keyword kw">end</span>
+217:                 <span class="ruby-identifier">alle</span> = <span class="ruby-constant">Array</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">anz_elemente</span>,<span class="ruby-value">1</span>)
+218:                 <span class="ruby-identifier">indexliste</span> =  <span class="ruby-constant">Array</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">anz_elemente</span>,<span class="ruby-value">0</span>)
+219:                 <span class="ruby-keyword kw">for</span> <span class="ruby-identifier">i</span> <span class="ruby-keyword kw">in</span> <span class="ruby-value">0</span><span class="ruby-operator">..</span>(<span class="ruby-identifier">anz_elemente</span><span class="ruby-operator">-</span><span class="ruby-value">1</span>)
+220:                         <span class="ruby-identifier">min</span> = <span class="ruby-value">1000000000000000</span>
+221:                         <span class="ruby-keyword kw">for</span> <span class="ruby-identifier">j</span> <span class="ruby-keyword kw">in</span> <span class="ruby-value">0</span><span class="ruby-operator">..</span>(<span class="ruby-identifier">anz_elemente</span><span class="ruby-operator">-</span><span class="ruby-value">1</span>)
+222:                                 <span class="ruby-keyword kw">if</span>(<span class="ruby-identifier">array</span>[<span class="ruby-identifier">j</span>] <span class="ruby-operator">&lt;</span> <span class="ruby-identifier">min</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">alle</span>[<span class="ruby-identifier">j</span>] <span class="ruby-operator">==</span> <span class="ruby-value">1</span>)
+223:                                         <span class="ruby-identifier">index</span> = <span class="ruby-identifier">j</span>
+224:                                         <span class="ruby-identifier">min</span> = <span class="ruby-identifier">array</span>[<span class="ruby-identifier">j</span>]
+225:                                 <span class="ruby-keyword kw">end</span>
+226:                         <span class="ruby-keyword kw">end</span>
+227:                         <span class="ruby-identifier">alle</span>[<span class="ruby-identifier">index</span>] = <span class="ruby-value">0</span>
+228:                         <span class="ruby-identifier">indexliste</span>[<span class="ruby-identifier">i</span>] = <span class="ruby-identifier">index</span>
+229:                 <span class="ruby-keyword kw">end</span>
+230:                 <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">indexliste</span>
+231:         <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000049" class="method-detail">
+        <a name="M000049"></a>
+
+        <div class="method-heading">
+          <a href="#M000049" class="method-signature">
+          <span class="method-name">strategie_fressen</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000049-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000049-source">
+<pre>
+     <span class="ruby-comment cmt"># File lib/strategie_pa.rb, line 259</span>
+259:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">strategie_fressen</span>
+260:                 <span class="ruby-comment cmt"># frisst Äpfel ohne zu sterben</span>
+261:         
+262:                 <span class="ruby-comment cmt"># @richtungen: Array, welches die Richtungen 0-3 enthält</span>
+263:                 <span class="ruby-comment cmt"># Zahl(int) = Bewertung des Zuges nach der Gefahr</span>
+264:                 <span class="ruby-comment cmt"># 100 = Mauer/Hindernis -&gt; sicherer Tod in DIESEM Zug!</span>
+265:                 <span class="ruby-comment cmt"># 0 = keine Bedrohung</span>
+266:                 <span class="ruby-ivar">@richtungen</span> = [<span class="ruby-value">0</span>,<span class="ruby-value">0</span>,<span class="ruby-value">0</span>,<span class="ruby-value">0</span>]
+267:                 
+268:                 <span class="ruby-comment cmt"># Richtungen bewerten</span>
+269:                 <span class="ruby-keyword kw">for</span> <span class="ruby-identifier">richtung</span> <span class="ruby-keyword kw">in</span> <span class="ruby-value">0</span><span class="ruby-operator">..</span><span class="ruby-value">3</span>  <span class="ruby-comment cmt"># Richtungen von 0 bis 3 durchgehen</span>
+270:                         <span class="ruby-identifier">zug_x</span>,<span class="ruby-identifier">zug_y</span> = <span class="ruby-identifier">vektor_verschiebung</span>(<span class="ruby-ivar">@x</span>,<span class="ruby-ivar">@y</span>,<span class="ruby-identifier">richtung</span>)
+271:                         <span class="ruby-identifier">art</span>,<span class="ruby-identifier">timer</span> = <span class="ruby-ivar">@spiel</span>[<span class="ruby-identifier">zug_x</span>,<span class="ruby-identifier">zug_y</span>]
+272:                         <span class="ruby-keyword kw">if</span> (<span class="ruby-identifier">art</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">art</span> <span class="ruby-operator">==</span> <span class="ruby-value">-2</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">timer</span> <span class="ruby-operator">==</span> <span class="ruby-value">1</span>)     <span class="ruby-comment cmt"># wenn auf dem Feld etweder nichts(0) oder ein Apfel(-2) ist oder das Feld im nächsten Zug geloescht wird (timer = 1)</span>
+273:                                 <span class="ruby-comment cmt"># Richtung ist frei</span>
+274:                                 <span class="ruby-comment cmt"># Bewertung:</span>
+275:                                 <span class="ruby-identifier">moeglichkeiten</span> = <span class="ruby-identifier">anz_moeglichkeiten</span>(<span class="ruby-identifier">zug_x</span>,<span class="ruby-identifier">zug_y</span>,<span class="ruby-value">1</span>)          <span class="ruby-comment cmt"># Anzahl angrenzende, freie Felder (0-3)</span>
+276:                                 <span class="ruby-identifier">gefahr_schlangen</span> = <span class="ruby-identifier">schlangenkoepfe</span>(<span class="ruby-identifier">zug_x</span>,<span class="ruby-identifier">zug_y</span>)                     <span class="ruby-comment cmt"># Gefahr durch Schlangenkopf (Bewertung in 0-99)</span>
+277:                                 <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;schlangen: #{gefahr_schlangen}, moeglichkeiten: #{moeglichkeiten}&quot;</span> <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@debug</span>
+278:                                 <span class="ruby-keyword kw">if</span>(<span class="ruby-identifier">gefahr_schlangen</span> <span class="ruby-operator">==</span> <span class="ruby-value">99</span>)
+279:                                         <span class="ruby-ivar">@richtungen</span>[<span class="ruby-identifier">richtung</span>] = <span class="ruby-value">99</span>
+280:                                 <span class="ruby-keyword kw">elsif</span>(<span class="ruby-identifier">moeglichkeiten</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>)
+281:                                         <span class="ruby-ivar">@richtungen</span>[<span class="ruby-identifier">richtung</span>] = <span class="ruby-value">99</span>
+282:                                 <span class="ruby-keyword kw">else</span>
+283:                                         <span class="ruby-ivar">@richtungen</span>[<span class="ruby-identifier">richtung</span>] = <span class="ruby-identifier">gefahr_schlangen</span>
+284:                                         <span class="ruby-ivar">@richtungen</span>[<span class="ruby-identifier">richtung</span>] <span class="ruby-operator">+=</span> (<span class="ruby-value">3</span><span class="ruby-operator">-</span><span class="ruby-identifier">moeglichkeiten</span>)<span class="ruby-operator">*</span><span class="ruby-value">6</span>
+285:                                         <span class="ruby-ivar">@richtungen</span>[<span class="ruby-identifier">richtung</span>] <span class="ruby-operator">+=</span> <span class="ruby-identifier">geschlossener_bereich</span>(<span class="ruby-identifier">zug_x</span>,<span class="ruby-identifier">zug_y</span>,<span class="ruby-identifier">richtung</span><span class="ruby-operator">+</span><span class="ruby-value">1</span>)     <span class="ruby-comment cmt"># Gefahr durch abgeschlossener (kleiner) Bereich </span>
+286:                                 <span class="ruby-keyword kw">end</span>
+287:                                 
+288:                         <span class="ruby-keyword kw">else</span>
+289:                                 <span class="ruby-comment cmt"># in der Richtung ist ein Hindernis</span>
+290:                                 <span class="ruby-ivar">@richtungen</span>[<span class="ruby-identifier">richtung</span>] = <span class="ruby-value">100</span>         <span class="ruby-comment cmt"># Richtung mit 100 (am schlechtesten) bewerten</span>
+291:                         <span class="ruby-keyword kw">end</span>
+292:                 <span class="ruby-keyword kw">end</span>
+293:                 
+294:                 <span class="ruby-ivar">@indexliste</span> = <span class="ruby-identifier">sortieren</span>(<span class="ruby-ivar">@richtungen</span>)
+295:                 
+296:                 <span class="ruby-comment cmt"># Array mit der Distanz zum Ziel für jede Richtung 0-3</span>
+297:                 <span class="ruby-identifier">wege</span> = <span class="ruby-identifier">direktester_weg</span>
+298:                 <span class="ruby-comment cmt"># Array mit true oder false für jede Richtung 0-3 (true = kill)</span>
+299:                 <span class="ruby-identifier">kills</span> = <span class="ruby-identifier">killmoeglichkeiten</span>
+300:                 
+301:                 
+302:                 <span class="ruby-identifier">dir</span> = <span class="ruby-identifier">vorlaufige_strategie</span>
+303:                 
+304:                 <span class="ruby-keyword kw">if</span> (<span class="ruby-ivar">@debug</span>)
+305:                         <span class="ruby-identifier">puts</span> <span class="ruby-value str">&quot;[re,ab,li,auf]&quot;</span>
+306:                         <span class="ruby-identifier">print</span> <span class="ruby-ivar">@richtungen</span>.<span class="ruby-identifier">inspect</span>
+307:                         <span class="ruby-identifier">puts</span> <span class="ruby-ivar">@indexliste</span>.<span class="ruby-identifier">inspect</span>
+308:                 <span class="ruby-keyword kw">end</span>
+309:                 <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">dir</span>
+310:         <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000043" class="method-detail">
+        <a name="M000043"></a>
+
+        <div class="method-heading">
+          <a href="#M000043" class="method-signature">
+          <span class="method-name">vektor_verschiebung</span><span class="method-args">(x,y,dir)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000043-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000043-source">
+<pre>
+     <span class="ruby-comment cmt"># File lib/strategie_pa.rb, line 137</span>
+137:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">vektor_verschiebung</span>(<span class="ruby-identifier">x</span>,<span class="ruby-identifier">y</span>,<span class="ruby-identifier">dir</span>)
+138:                 <span class="ruby-identifier">vx</span>,<span class="ruby-identifier">vy</span> = <span class="ruby-identifier">dir</span>.<span class="ruby-identifier">to_dir</span>
+139:                 <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">x</span><span class="ruby-operator">+</span><span class="ruby-identifier">vx</span>,<span class="ruby-identifier">y</span><span class="ruby-operator">+</span><span class="ruby-identifier">vy</span>
+140:         <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000040" class="method-detail">
+        <a name="M000040"></a>
+
+        <div class="method-heading">
+          <a href="#M000040" class="method-signature">
+          <span class="method-name">vorlaufige_strategie</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000040-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000040-source">
+<pre>
+    <span class="ruby-comment cmt"># File lib/strategie_pa.rb, line 55</span>
+55:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">vorlaufige_strategie</span>
+56:                 <span class="ruby-ivar">@hauptziel</span> = [ <span class="ruby-value">13</span>, <span class="ruby-value">7</span>]
+57:                 <span class="ruby-identifier">distanz</span> = <span class="ruby-value">1000</span>
+58:                 <span class="ruby-ivar">@spiel</span>.<span class="ruby-identifier">aepfel</span>.<span class="ruby-identifier">each</span> {
+59:                         <span class="ruby-operator">|</span><span class="ruby-identifier">apfel</span><span class="ruby-operator">|</span>
+60:                         <span class="ruby-keyword kw">if</span> (((<span class="ruby-ivar">@x</span><span class="ruby-operator">-</span><span class="ruby-identifier">apfel</span>[<span class="ruby-value">0</span>]).<span class="ruby-identifier">abs</span><span class="ruby-operator">+</span>(<span class="ruby-ivar">@y</span><span class="ruby-operator">-</span><span class="ruby-identifier">apfel</span>[<span class="ruby-value">1</span>]).<span class="ruby-identifier">abs</span>).<span class="ruby-identifier">abs</span> <span class="ruby-operator">&lt;</span> <span class="ruby-identifier">distanz</span>)
+61:                                 <span class="ruby-identifier">distanz</span> = ((<span class="ruby-ivar">@x</span><span class="ruby-operator">-</span><span class="ruby-identifier">apfel</span>[<span class="ruby-value">0</span>]).<span class="ruby-identifier">abs</span><span class="ruby-operator">+</span>(<span class="ruby-ivar">@y</span><span class="ruby-operator">-</span><span class="ruby-identifier">apfel</span>[<span class="ruby-value">1</span>]).<span class="ruby-identifier">abs</span>).<span class="ruby-identifier">abs</span>
+62:                                 <span class="ruby-ivar">@hauptziel</span> = <span class="ruby-identifier">apfel</span>
+63:                         <span class="ruby-keyword kw">end</span>
+64:                 }
+65:                 
+66:                 
+67:                 <span class="ruby-identifier">dir</span> = <span class="ruby-ivar">@indexliste</span>[<span class="ruby-value">0</span>]
+68:                 <span class="ruby-ivar">@indexliste</span>.<span class="ruby-identifier">each</span> {
+69:                         <span class="ruby-operator">|</span><span class="ruby-identifier">richtung</span><span class="ruby-operator">|</span>
+70:                         <span class="ruby-identifier">dx</span>,<span class="ruby-identifier">dy</span> = <span class="ruby-identifier">richtung</span>.<span class="ruby-identifier">to_dir</span>
+71:                         <span class="ruby-keyword kw">if</span> (((<span class="ruby-ivar">@x</span><span class="ruby-operator">-</span><span class="ruby-ivar">@hauptziel</span>[<span class="ruby-value">0</span>]).<span class="ruby-identifier">abs</span><span class="ruby-operator">+</span>(<span class="ruby-ivar">@y</span><span class="ruby-operator">-</span><span class="ruby-ivar">@hauptziel</span>[<span class="ruby-value">1</span>]).<span class="ruby-identifier">abs</span>).<span class="ruby-identifier">abs</span> <span class="ruby-operator">&gt;=</span> ((<span class="ruby-ivar">@x</span><span class="ruby-operator">-</span><span class="ruby-ivar">@hauptziel</span>[<span class="ruby-value">0</span>]<span class="ruby-operator">+</span><span class="ruby-identifier">dx</span>).<span class="ruby-identifier">abs</span><span class="ruby-operator">+</span>(<span class="ruby-ivar">@y</span><span class="ruby-operator">-</span><span class="ruby-ivar">@hauptziel</span>[<span class="ruby-value">1</span>]<span class="ruby-operator">+</span><span class="ruby-identifier">dy</span>).<span class="ruby-identifier">abs</span>).<span class="ruby-identifier">abs</span>)
+72:                                 <span class="ruby-keyword kw">if</span>(<span class="ruby-ivar">@richtungen</span>[<span class="ruby-identifier">richtung</span>] <span class="ruby-operator">&lt;</span> <span class="ruby-value">20</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-ivar">@richtungen</span>[<span class="ruby-identifier">richtung</span>] <span class="ruby-operator">&lt;</span> <span class="ruby-ivar">@richtungen</span>[<span class="ruby-ivar">@indexliste</span>[<span class="ruby-value">0</span>]]<span class="ruby-operator">+</span><span class="ruby-value">7</span>)     <span class="ruby-comment cmt"># muss besser als das beste um 10 verschlechtert sein und besser als 30</span>
+73:                                         <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">richtung</span>
+74:                                 <span class="ruby-keyword kw">end</span>
+75:                         <span class="ruby-keyword kw">end</span>
+76:                 }
+77:                 <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">dir</span>
+78:         <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000050" class="method-detail">
+        <a name="M000050"></a>
+
+        <div class="method-heading">
+          <a href="#M000050" class="method-signature">
+          <span class="method-name">wohin?</span><span class="method-args">(spiel)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000050-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000050-source">
+<pre>
+     <span class="ruby-comment cmt"># File lib/strategie_pa.rb, line 316</span>
+316:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">wohin?</span>(<span class="ruby-identifier">spiel</span>)
+317: 
+318:                 <span class="ruby-ivar">@spiel</span> = <span class="ruby-identifier">spiel</span>
+319:                 
+320:                 <span class="ruby-comment cmt"># Position und Richtung der Schlange</span>
+321:                 <span class="ruby-ivar">@x</span>,<span class="ruby-ivar">@y</span>,<span class="ruby-ivar">@dir</span> = <span class="ruby-ivar">@spiel</span>.<span class="ruby-identifier">wo_bin_ich?</span>
+322:                 <span class="ruby-identifier">dir</span> = <span class="ruby-ivar">@dir</span>
+323:                 
+324:                 <span class="ruby-keyword kw">begin</span> <span class="ruby-comment cmt"># Timersicherung</span>
+325:                 <span class="ruby-constant">Timeout</span>.<span class="ruby-identifier">timeout</span>(<span class="ruby-value">0</span><span class="ruby-value">.1</span>) {
+326:                 
+327:                 <span class="ruby-comment cmt"># Schlangen-Nummer und Länge der Schlange (nummer von 1-n)</span>
+328:                 <span class="ruby-ivar">@nummer</span>,<span class="ruby-ivar">@laenge</span> = <span class="ruby-ivar">@spiel</span>[<span class="ruby-ivar">@x</span>,<span class="ruby-ivar">@y</span>]
+329:                 
+330:                 <span class="ruby-comment cmt"># Zugnummer hochzählen</span>
+331:                 <span class="ruby-ivar">@zugnr</span> <span class="ruby-operator">+=</span> <span class="ruby-value">1</span>
+332:                 
+333:                 <span class="ruby-comment cmt"># Schlangenlängen aufschreiben</span>
+334:                 <span class="ruby-ivar">@schlangenlaengen</span> = <span class="ruby-constant">Array</span>.<span class="ruby-identifier">new</span>
+335:                 <span class="ruby-ivar">@gesamtlaenge_schlangen</span> = <span class="ruby-value">0</span>
+336:                 <span class="ruby-ivar">@anzahl_schlangen</span> = <span class="ruby-value">0</span>
+337:                 <span class="ruby-identifier">i</span> = <span class="ruby-value">0</span>
+338:                 <span class="ruby-ivar">@spiel</span>.<span class="ruby-identifier">schlangen_pos</span>.<span class="ruby-identifier">each</span> {
+339:                         <span class="ruby-operator">|</span><span class="ruby-identifier">schlange</span><span class="ruby-operator">|</span>
+340:                         <span class="ruby-keyword kw">if</span>(<span class="ruby-ivar">@spiel</span>.<span class="ruby-identifier">lebend</span>[<span class="ruby-identifier">i</span>]) <span class="ruby-comment cmt"># wenn die Schlange noch lebt</span>
+341:                                 <span class="ruby-identifier">nummer</span>,<span class="ruby-identifier">laenge</span> = <span class="ruby-ivar">@spiel</span>[<span class="ruby-identifier">schlange</span>[<span class="ruby-value">0</span>],<span class="ruby-identifier">schlange</span>[<span class="ruby-value">1</span>]]
+342:                                 <span class="ruby-ivar">@gesamtlaenge_schlangen</span> <span class="ruby-operator">+=</span> <span class="ruby-identifier">laenge</span>
+343:                                 <span class="ruby-ivar">@schlangenlaengen</span>.<span class="ruby-identifier">push</span>(<span class="ruby-identifier">laenge</span>)
+344:                                 <span class="ruby-ivar">@anzahl_schlangen</span> <span class="ruby-operator">+=</span> <span class="ruby-value">1</span>
+345:                         <span class="ruby-keyword kw">else</span>
+346:                                 <span class="ruby-ivar">@schlangenlaengen</span>.<span class="ruby-identifier">push</span>(<span class="ruby-value">0</span>)
+347:                         <span class="ruby-keyword kw">end</span>
+348:                         <span class="ruby-identifier">i</span> <span class="ruby-operator">+=</span> <span class="ruby-value">1</span>
+349:                 }
+350:                 
+351:                 <span class="ruby-comment cmt"># Beim 1. Zug:</span>
+352:                 <span class="ruby-keyword kw">if</span> (<span class="ruby-ivar">@zugnr</span> <span class="ruby-operator">==</span> <span class="ruby-value">1</span>)
+353:                         <span class="ruby-comment cmt"># Informationen zum Spielfeld</span>
+354:                         <span class="ruby-ivar">@max_x</span> = <span class="ruby-ivar">@spiel</span>.<span class="ruby-identifier">feld</span>.<span class="ruby-identifier">x</span>
+355:                         <span class="ruby-ivar">@max_y</span> = <span class="ruby-ivar">@spiel</span>.<span class="ruby-identifier">feld</span>.<span class="ruby-identifier">y</span>
+356:                 <span class="ruby-keyword kw">end</span>
+357:                 
+358:                 <span class="ruby-comment cmt"># Spielfeld scannen</span>
+359:                 <span class="ruby-comment cmt"># @spielfeld_kopie[x][y][Attribute] Attribute: 0=art, 1=timer, 2=geschlossenerBereich-status, 3=schnellsterWegApfel-status</span>
+360:                 <span class="ruby-ivar">@spielfeld_kopie</span> = <span class="ruby-constant">Array</span>.<span class="ruby-identifier">new</span>()
+361:                 <span class="ruby-keyword kw">for</span> <span class="ruby-identifier">xfeld</span> <span class="ruby-keyword kw">in</span> <span class="ruby-value">0</span><span class="ruby-operator">..</span><span class="ruby-ivar">@max_x</span><span class="ruby-operator">-</span><span class="ruby-value">1</span>
+362:                         <span class="ruby-identifier">spalte</span> = <span class="ruby-constant">Array</span>.<span class="ruby-identifier">new</span>
+363:                         <span class="ruby-keyword kw">for</span> <span class="ruby-identifier">yfeld</span> <span class="ruby-keyword kw">in</span> <span class="ruby-value">0</span><span class="ruby-operator">..</span><span class="ruby-ivar">@max_y</span><span class="ruby-operator">-</span><span class="ruby-value">1</span>
+364:                                 <span class="ruby-identifier">art</span>,<span class="ruby-identifier">timer</span> = <span class="ruby-ivar">@spiel</span>[<span class="ruby-identifier">xfeld</span>,<span class="ruby-identifier">yfeld</span>]
+365:                                 <span class="ruby-identifier">spalte</span>.<span class="ruby-identifier">push</span>([<span class="ruby-identifier">art</span>,<span class="ruby-identifier">timer</span>,<span class="ruby-value">0</span>,<span class="ruby-value">0</span>])
+366:                                 <span class="ruby-comment cmt"># jedes Feld enthält [art,timer,für geschlossener Bereich,für schnellster weg zum Apfel]</span>
+367:                         <span class="ruby-keyword kw">end</span>
+368:                         <span class="ruby-ivar">@spielfeld_kopie</span>.<span class="ruby-identifier">push</span>(<span class="ruby-identifier">spalte</span>)
+369:                 <span class="ruby-keyword kw">end</span>
+370:                 
+371:                 <span class="ruby-comment cmt"># Beim 1. Zug:</span>
+372:                 <span class="ruby-keyword kw">if</span> (<span class="ruby-ivar">@zugnr</span> <span class="ruby-operator">==</span> <span class="ruby-value">1</span>)
+373:                         <span class="ruby-ivar">@gesamtzahl_felder</span> = <span class="ruby-ivar">@max_x</span><span class="ruby-operator">*</span><span class="ruby-ivar">@max_y</span>
+374:                         <span class="ruby-ivar">@gesamtzahl_freie_felder</span> = <span class="ruby-ivar">@gesamtzahl_felder</span>                <span class="ruby-comment cmt"># Anzahl freie Felder im Spielfeld (ohne Schlangen)</span>
+375:                         <span class="ruby-ivar">@spielfeld_kopie</span>.<span class="ruby-identifier">each</span> {
+376:                                 <span class="ruby-operator">|</span><span class="ruby-identifier">spalte</span><span class="ruby-operator">|</span>
+377:                                 <span class="ruby-identifier">spalte</span>.<span class="ruby-identifier">each</span> {
+378:                                         <span class="ruby-operator">|</span><span class="ruby-identifier">feld</span><span class="ruby-operator">|</span>
+379:                                         <span class="ruby-keyword kw">if</span> (<span class="ruby-identifier">feld</span>[<span class="ruby-value">0</span>] <span class="ruby-operator">==</span> <span class="ruby-value">-1</span>)         <span class="ruby-comment cmt"># Wenn art = eine Mauer</span>
+380:                                                 <span class="ruby-ivar">@gesamtzahl_freie_felder</span> <span class="ruby-operator">-=</span> <span class="ruby-value">1</span>
+381:                                         <span class="ruby-keyword kw">end</span>
+382:                                 }
+383:                         }
+384:                         
+385:                         <span class="ruby-comment cmt"># Damit in 1. Zug geradeaus läuft</span>
+386:                         <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;1. Zug der Schlange #{@nummer}: geradeaus&quot;</span> <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@debug</span>
+387:                         <span class="ruby-keyword kw">return</span> <span class="ruby-ivar">@dir</span>
+388:                 <span class="ruby-keyword kw">end</span>
+389:                 <span class="ruby-comment cmt"># Anzahl freie Felder (inkl. Schlangen)</span>
+390:                 <span class="ruby-ivar">@anz_freie_felder</span> = <span class="ruby-ivar">@gesamtzahl_freie_felder</span> <span class="ruby-operator">-</span> <span class="ruby-ivar">@gesamtlaenge_schlangen</span>
+391:                 
+392:                 <span class="ruby-comment cmt"># vorläufiges dir:</span>
+393:                 <span class="ruby-keyword kw">for</span> <span class="ruby-identifier">i</span> <span class="ruby-keyword kw">in</span> <span class="ruby-value">0</span><span class="ruby-operator">..</span><span class="ruby-value">3</span>
+394:                         <span class="ruby-identifier">dx</span>,<span class="ruby-identifier">dy</span> = <span class="ruby-identifier">vektor_verschiebung</span>(<span class="ruby-ivar">@x</span>,<span class="ruby-ivar">@y</span>,<span class="ruby-identifier">i</span>)
+395:                         <span class="ruby-identifier">art</span>,<span class="ruby-identifier">timer</span> = <span class="ruby-ivar">@spiel</span>[<span class="ruby-identifier">dx</span>,<span class="ruby-identifier">dy</span>]
+396:                         <span class="ruby-keyword kw">if</span> (<span class="ruby-identifier">art</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">art</span> <span class="ruby-operator">==</span> <span class="ruby-value">-2</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">timer</span> <span class="ruby-operator">==</span> <span class="ruby-value">1</span>)     <span class="ruby-comment cmt"># wenn das Feld frei ist</span>
+397:                                 <span class="ruby-identifier">dir</span> = <span class="ruby-identifier">i</span>
+398:                         <span class="ruby-keyword kw">end</span>
+399:                 <span class="ruby-keyword kw">end</span>
+400:                 
+401:                 
+402:                 <span class="ruby-keyword kw">if</span> (<span class="ruby-ivar">@debug</span>)
+403:                         <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;Allgemeine Infos Spielschritt #{@zugnr}:&quot;</span>
+404:                         <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;Schlangen: #{@spiel.schlangen_pos.inspect} (#{@spiel.lebend.inspect}), (Anzahl Schlangen = #{@anzahl_schlangen})&quot;</span>
+405:                         <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;Spielfeld: Felder: Gesamtzahl: #{@gesamtzahl_felder} davon #{@gesamtzahl_freie_felder} frei (mit Schlangen: #{@anz_freie_felder} frei)&quot;</span>
+406:                         <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;********* Schlange #{@nummer}, Position [#{@x},#{@y}], Laenge #{@laenge} ************************************&quot;</span>
+407:                 <span class="ruby-keyword kw">end</span>
+408:                 <span class="ruby-identifier">dir</span> = <span class="ruby-identifier">strategie_fressen</span>
+409:                 
+410:                 <span class="ruby-keyword kw">if</span> (<span class="ruby-ivar">@debug</span>)
+411:                         <span class="ruby-keyword kw">if</span> (<span class="ruby-ivar">@richtungen</span>[<span class="ruby-identifier">dir</span>] <span class="ruby-operator">==</span> <span class="ruby-value">100</span>) <span class="ruby-comment cmt"># wenn meine Schlange jetzt stirbt</span>
+412:                                 <span class="ruby-identifier">puts</span> <span class="ruby-value str">&quot;Schlange stirbt!&quot;</span>
+413:                                 <span class="ruby-identifier">gets</span>
+414:                         <span class="ruby-keyword kw">end</span>
+415:                         <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;Return: #{dir}, Gefahr: #{@richtungen[dir]}&quot;</span>
+416:                         <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;********* Ende Schlange #{@nummer} ************************************&quot;</span>
+417:                 <span class="ruby-keyword kw">end</span>
+418:                 <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">dir</span>
+419:                 
+420:                              
+421:                 }
+422:         <span class="ruby-keyword kw">rescue</span> <span class="ruby-constant">Timeout</span><span class="ruby-operator">::</span><span class="ruby-constant">Error</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">e</span>
+423:           <span class="ruby-identifier">puts</span> <span class="ruby-value str">&quot;Funktion aus Zeitmangel abgebrochen&quot;</span>
+424:                   <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">dir</span>
+425:         <span class="ruby-keyword kw">end</span>
+426:                 
+427:         <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+
+
+  </div>
+
+
+<div id="validator-badges">
+  <p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+</div>
+
+</body>
+</html>

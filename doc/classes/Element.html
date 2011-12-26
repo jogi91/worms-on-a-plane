@@ -1,0 +1,428 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>Class: Element</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Script-Type" content="text/javascript" />
+  <link rel="stylesheet" href=".././rdoc-style.css" type="text/css" media="screen" />
+  <script type="text/javascript">
+  // <![CDATA[
+
+  function popupCode( url ) {
+    window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+  }
+
+  function toggleCode( id ) {
+    if ( document.getElementById )
+      elem = document.getElementById( id );
+    else if ( document.all )
+      elem = eval( "document.all." + id );
+    else
+      return false;
+
+    elemStyle = elem.style;
+    
+    if ( elemStyle.display != "block" ) {
+      elemStyle.display = "block"
+    } else {
+      elemStyle.display = "none"
+    }
+
+    return true;
+  }
+  
+  // Make codeblocks hidden by default
+  document.writeln( "<style type=\"text/css\">div.method-source-code { display: none }</style>" )
+  
+  // ]]>
+  </script>
+
+</head>
+<body>
+
+
+
+    <div id="classHeader">
+        <table class="header-table">
+        <tr class="top-aligned-row">
+          <td><strong>Class</strong></td>
+          <td class="class-name-in-header">Element</td>
+        </tr>
+        <tr class="top-aligned-row">
+            <td><strong>In:</strong></td>
+            <td>
+                <a href="../files/lib/fx_snake_window_rb.html">
+                lib/fx_snake_window.rb
+                </a>
+        <br />
+                <a href="../files/lib/element_rb.html">
+                lib/element.rb
+                </a>
+        <br />
+            </td>
+        </tr>
+
+        <tr class="top-aligned-row">
+            <td><strong>Parent:</strong></td>
+            <td>
+                Object
+            </td>
+        </tr>
+        </table>
+    </div>
+  <!-- banner header -->
+
+  <div id="bodyContent">
+
+
+
+  <div id="contextContent">
+
+    <div id="description">
+      <p>
+Ein <a href="Element.html">Element</a> des Spielfeldes <a
+href="Feld.html">Feld</a>.
+</p>
+<p>
+@timer gibt an, wie viele Zeitschritte das <a href="Feld.html">Feld</a>
+noch so bleibt.
+</p>
+
+    </div>
+
+
+   </div>
+
+    <div id="method-list">
+      <h3 class="section-bar">Methods</h3>
+
+      <div class="name-list">
+      <a href="#M000080">aktualisieren</a>&nbsp;&nbsp;
+      <a href="#M000078">element_change</a>&nbsp;&nbsp;
+      <a href="#M000079">new</a>&nbsp;&nbsp;
+      <a href="#M000077">set</a>&nbsp;&nbsp;
+      <a href="#M000081">set</a>&nbsp;&nbsp;
+      <a href="#M000076">set_fxwin</a>&nbsp;&nbsp;
+      </div>
+    </div>
+
+  </div>
+
+
+    <!-- if includes -->
+
+    <div id="section">
+
+
+
+    <div id="aliases-list">
+      <h3 class="section-bar">External Aliases</h3>
+
+      <div class="name-list">
+                        <table summary="aliases">
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">set</td>
+          <td>-&gt;</td>
+          <td class="context-item-value">set_old</td>
+        </tr>
+      <tr class="top-aligned-row context-row">
+        <td>&nbsp;</td>
+        <td colspan="2" class="context-item-desc">
+Methode <a href="Element.html#M000077">set</a> klonen und eigene
+einhängen.
+
+</td>
+      </tr>
+                        </table>
+      </div>
+    </div>
+
+
+    <div id="attribute-list">
+      <h3 class="section-bar">Attributes</h3>
+
+      <div class="name-list">
+        <table>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">art</td>
+          <td class="context-item-value">&nbsp;[R]&nbsp;</td>
+          <td class="context-item-desc">
+gibt an, was auf dem <a href="Feld.html">Feld</a> ist wobei:
+
+<pre>
+  [0] leer
+</pre>
+<dl>
+<dt>-1</dt><dd>Mauer
+
+</dd>
+<dt>-2</dt><dd>Apfel
+
+</dd>
+<dt>z</dt><dd>Nummer der Schlange (z&gt;0)
+
+</dd>
+</dl>
+</td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">dir</td>
+          <td class="context-item-value">&nbsp;[RW]&nbsp;</td>
+          <td class="context-item-desc">
+Ausrichtung des Schlangenkörpers (wenn es dann eine ist)
+
+<ul>
+<li>0: Kopf-Rechts
+
+</li>
+<li>1: Kopf-Unten
+
+</li>
+<li>2: Kopf-Links
+
+</li>
+<li>3: Kopf-Oben
+
+</li>
+<li>4: rechts-unten
+
+</li>
+<li>5: unten-links
+
+</li>
+<li>6: links-oben
+
+</li>
+<li>7: oben-rechts
+
+</li>
+<li>8: horizontal
+
+</li>
+<li>9: vertikal
+
+</li>
+</ul>
+</td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">timer</td>
+          <td class="context-item-value">&nbsp;[R]&nbsp;</td>
+          <td class="context-item-desc">
+gibt an, wie viel Zeitschritte das <a href="Element.html">Element</a> noch
+so bleibt Ein negativer Wert oder 0 heisst für immer.
+
+</td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">x</td>
+          <td class="context-item-value">&nbsp;[R]&nbsp;</td>
+          <td class="context-item-desc">
+X-Koordinate dieses Elements
+
+</td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">y</td>
+          <td class="context-item-value">&nbsp;[R]&nbsp;</td>
+          <td class="context-item-desc">
+Y-Kooridnate dieses Elements
+
+</td>
+        </tr>
+        </table>
+      </div>
+    </div>
+      
+
+
+    <!-- if method_list -->
+    <div id="methods">
+      <h3 class="section-bar">Public Class methods</h3>
+
+      <div id="method-M000079" class="method-detail">
+        <a name="M000079"></a>
+
+        <div class="method-heading">
+          <a href="#M000079" class="method-signature">
+          <span class="method-name">new</span><span class="method-args">(x,y)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Generiert ein neues, leeres <a href="Element.html">Element</a>
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000079-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000079-source">
+<pre>
+    <span class="ruby-comment cmt"># File lib/element.rb, line 44</span>
+44:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">x</span>,<span class="ruby-identifier">y</span>)
+45:     <span class="ruby-ivar">@x</span> = <span class="ruby-identifier">x</span>
+46:     <span class="ruby-ivar">@y</span> = <span class="ruby-identifier">y</span>
+47:     <span class="ruby-identifier">set</span>(<span class="ruby-value">0</span>,<span class="ruby-value">0</span>)
+48:   <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000076" class="method-detail">
+        <a name="M000076"></a>
+
+        <div class="method-heading">
+          <a href="#M000076" class="method-signature">
+          <span class="method-name">set_fxwin</span><span class="method-args">(win)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Neue Klassenvariable für die Grafik
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000076-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000076-source">
+<pre>
+    <span class="ruby-comment cmt"># File lib/fx_snake_window.rb, line 20</span>
+20:   <span class="ruby-keyword kw">def</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">set_fxwin</span>(<span class="ruby-identifier">win</span>)
+21:     <span class="ruby-ivar">@@snakewindow</span> = <span class="ruby-identifier">win</span>
+22:   <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <h3 class="section-bar">Public Instance methods</h3>
+
+      <div id="method-M000080" class="method-detail">
+        <a name="M000080"></a>
+
+        <div class="method-heading">
+          <a href="#M000080" class="method-signature">
+          <span class="method-name">aktualisieren</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Ein Zeitschritt ist vorbei. Felder <a
+href="Element.html#M000080">aktualisieren</a> Felder mit abgelaufenem
+@timer werden als leer markiert.
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000080-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000080-source">
+<pre>
+    <span class="ruby-comment cmt"># File lib/element.rb, line 52</span>
+52:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">aktualisieren</span>
+53:     <span class="ruby-keyword kw">if</span> (<span class="ruby-ivar">@timer</span><span class="ruby-operator">&gt;</span><span class="ruby-value">0</span>)
+54:       <span class="ruby-ivar">@timer</span> <span class="ruby-operator">-=</span> <span class="ruby-value">1</span>
+55:       <span class="ruby-keyword kw">if</span> (<span class="ruby-ivar">@timer</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>)
+56:         <span class="ruby-identifier">set</span>(<span class="ruby-value">0</span>,<span class="ruby-value">0</span>)
+57:       <span class="ruby-keyword kw">end</span>
+58:     <span class="ruby-keyword kw">end</span>
+59:   <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000078" class="method-detail">
+        <a name="M000078"></a>
+
+        <div class="method-heading">
+          <a href="#M000078" class="method-signature">
+          <span class="method-name">element_change</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Callback zur Grafik
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000078-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000078-source">
+<pre>
+    <span class="ruby-comment cmt"># File lib/fx_snake_window.rb, line 32</span>
+32:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">element_change</span>
+33:     <span class="ruby-keyword kw">if</span> <span class="ruby-keyword kw">defined?</span> <span class="ruby-ivar">@@snakewindow</span> <span class="ruby-keyword kw">and</span> <span class="ruby-ivar">@@snakewindow</span> <span class="ruby-operator">!=</span> <span class="ruby-keyword kw">nil</span>
+34:       <span class="ruby-ivar">@@snakewindow</span>.<span class="ruby-identifier">zeichne</span>(<span class="ruby-ivar">@x</span>,<span class="ruby-ivar">@y</span>,<span class="ruby-ivar">@art</span>, <span class="ruby-ivar">@dir</span>)
+35:     <span class="ruby-keyword kw">end</span>
+36:   <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000077" class="method-detail">
+        <a name="M000077"></a>
+
+        <div class="method-heading">
+          <a href="#M000077" class="method-signature">
+          <span class="method-name">set</span><span class="method-args">(*p)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000077-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000077-source">
+<pre>
+    <span class="ruby-comment cmt"># File lib/fx_snake_window.rb, line 26</span>
+26:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">set</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">p</span>)
+27:     <span class="ruby-identifier">set_old</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">p</span>);
+28:     <span class="ruby-identifier">element_change</span>;
+29:   <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000081" class="method-detail">
+        <a name="M000081"></a>
+
+        <div class="method-heading">
+          <a href="#M000081" class="method-signature">
+          <span class="method-name">set</span><span class="method-args">(art, timer, dir=0)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Werte neu setzen
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000081-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000081-source">
+<pre>
+    <span class="ruby-comment cmt"># File lib/element.rb, line 62</span>
+62:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">set</span>(<span class="ruby-identifier">art</span>, <span class="ruby-identifier">timer</span>, <span class="ruby-identifier">dir</span>=<span class="ruby-value">0</span>)
+63:     <span class="ruby-ivar">@art</span> = <span class="ruby-identifier">art</span>
+64:     <span class="ruby-ivar">@timer</span> = <span class="ruby-identifier">timer</span>
+65:     <span class="ruby-ivar">@dir</span> = <span class="ruby-identifier">dir</span>
+66:   <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+
+
+  </div>
+
+
+<div id="validator-badges">
+  <p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+</div>
+
+</body>
+</html>
