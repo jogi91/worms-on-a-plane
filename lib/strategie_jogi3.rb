@@ -15,6 +15,7 @@ class Strategie_Jogi3 < Strategie
 	def wohin?(spiel)
 		@spiel = spiel
 		@x,@y,@dir = spiel.wo_bin_ich?
+
 		if @apfel != spiel.aepfel[0]
 			@modus = :check
 			@apfel = spiel.aepfel[0]
@@ -64,11 +65,35 @@ class Strategie_Jogi3 < Strategie
 		end
 
 
+		#Gehe in die Richtung, wo ich die meisten Felder habe
 		if @modus == :flucht
 			@modus = :check
-			return 1
+			
+			dirs = Array.new(4,0)
+			for i in 0..3
+				x = @x + i.to_dir[0]
+				y = @y + i.to_dir[1]
 
-		
+				if onTheField?(x,y) == false
+					next
+				end
+
+				#Zähle die freien Felder
+				while free?(@spiel[x,y])
+					dirs[i] += 1
+					x += i.to_dir[0]
+					y += i.to_dir[1]
+					
+					if onTheField?(x,y) == false
+						break
+					end
+				end
+				#wenn ich am meisten Platz habe, neuen topwert speichern
+				if dirs[i] >= dirs.max
+					mostspace = i
+				end
+			end
+			return mostspace
 		end
 	end
 
@@ -180,5 +205,20 @@ class Strategie_Jogi3 < Strategie
 		}
 		return true
 	end
+		
+	def free?(field)
+		if field[0] == 0 or field[0] == -2
+			return true
+		else
+			return false
+		end
+	end
 
+	def onTheField?(x,y)
+		if x < 0 or y < 0 or x > @spiel.x or y > @spiel.y
+			return false
+		else
+			return true
+		end
+	end
 end
