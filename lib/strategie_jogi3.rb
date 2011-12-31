@@ -22,6 +22,7 @@ class Strategie_Jogi3 < Strategie
 		end
 
 		if @modus == :check
+			p @spiel.lebend
 			if nearest?
 				@modus = :apfel
 			else
@@ -198,8 +199,8 @@ class Strategie_Jogi3 < Strategie
 	#Bin ich am Nächsten zum Apfel?
 	def nearest?
 		mydistance = manhattan([@x,@y],@apfel)
-		@spiel.schlangen_pos.each { |position| 
-			if manhattan(position[0, 2], @apfel) < mydistance
+		@spiel.schlangen_pos.each_with_index { |position, index| 
+			if manhattan(position[0, 2], @apfel) < mydistance and @spiel.lebend[index] == true
 				return false
 			end
 		}
