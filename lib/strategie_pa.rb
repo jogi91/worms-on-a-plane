@@ -351,8 +351,8 @@ class Strategie_Pa < Strategie
 		# Beim 1. Zug:
 		if (@zugnr == 1)
 			# Informationen zum Spielfeld
-			@max_x = @spiel.feld.x
-			@max_y = @spiel.feld.y
+			@max_x = @spiel.x
+			@max_y = @spiel.y
 		end
 		
 		# Spielfeld scannen
