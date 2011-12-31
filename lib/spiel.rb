@@ -12,7 +12,7 @@ class Spiel
   # Höhe des Spielfeldes
   attr_reader :y
   # Spielfeld (Feld)
-  attr_reader :feld
+  #attr_reader :feldi # Eigentlich unnötig, da ja die Methode Spiel[] angeboten wird
   # Array mit Koordinaten (Array mit 2 Koordinaten) der Äpfel
   # 
   # z.B [ [4,3], [7,4] ]
