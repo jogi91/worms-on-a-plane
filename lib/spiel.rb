@@ -85,31 +85,6 @@ class Spiel
     }
   end
   
-  # Positioniert einen neuen Apfel so, dass auf den acht
-  # Feldern um den Apfel nicht ist.
-  # Werden Koordinaten uebergeben, wird dort der Apfel
-  # aus dem @aepfel Array entfernt.
-  def neuer_Apfel(wegx=-1,wegy=-1)
-    if (wegx>=0)
-      @aepfel.delete([wegx,wegy])
-    end
-    x,y = 0,0
-    begin
-      ok = true
-      x,y = rand(@x-2)+1, rand(@y-2)+1
-      for a in -1..1
-        for b in -1..1
-          art,timer = @feld[x+a,y+b]
-          if (art != 0)
-            ok = false
-          end
-        end
-      end
-    end until ok
-    @feld.set_element(x,y,-2,0)
-    @aepfel += [[x,y]]
-    @numapf += 1
-  end
   
   # Führt einen Spielschritt aus und gibt ein Array zurück mit 
   # true/false für jede noch lebende Schlange.
@@ -216,4 +191,30 @@ class Spiel
     return @feld[x,y]
   end
   
+	private
+  # Positioniert einen neuen Apfel so, dass auf den acht
+  # Feldern um den Apfel nicht ist.
+  # Werden Koordinaten uebergeben, wird dort der Apfel
+  # aus dem @aepfel Array entfernt.
+  def neuer_Apfel(wegx=-1,wegy=-1)
+    if (wegx>=0)
+      @aepfel.delete([wegx,wegy])
+    end
+    x,y = 0,0
+    begin
+      ok = true
+      x,y = rand(@x-2)+1, rand(@y-2)+1
+      for a in -1..1
+        for b in -1..1
+          art,timer = @feld[x+a,y+b]
+          if (art != 0)
+            ok = false
+          end
+        end
+      end
+    end until ok
+    @feld.set_element(x,y,-2,0)
+    @aepfel += [[x,y]]
+    @numapf += 1
+  end
 end
