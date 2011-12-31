@@ -99,93 +99,95 @@ class Strategie_Jogi3 < Strategie
 	end
 
 	def freieSicht?(zielkoordinaten, startrichtung)
-		xZiel = zielkoordinaten[0]
-		yZiel = zielkoordinaten[1]
+		begin
+			xZiel = zielkoordinaten[0]
+			yZiel = zielkoordinaten[1]
+			if startrichtung == 0 or startrichtung == 2
+				#Erst x, dann y Richtund
+				if @x < xZiel
+					for i in @x+1..xZiel
+						#Wenn das Feld nicht Frei oder ein Apfel ist, ist das keine freie Sichtlinie
+						if !(@spiel[i, @y][0] == 0 or @spiel[i, @y][0] == -2)
+							puts "@x: #{@x}, i: #{i}"
+							p @spiel[@x,i]
+							return false
+						end
+					end
+				else
+					for i in xZiel..@x-1
+						if !(@spiel[i, @y][0] == 0 or @spiel[i, @y][0] == -2)
+							puts "@x: #{@x}, i: #{i}"
+							p @spiel[@x,i]
+							return false
+						end
+					end
+				end
 
-		if startrichtung == 0 or startrichtung == 2
-			#Erst x, dann y Richtund
-			if @x < xZiel
-				for i in @x+1..xZiel
-					#Wenn das Feld nicht Frei oder ein Apfel ist, ist das keine freie Sichtlinie
-					if !(@spiel[i, @y][0] == 0 or @spiel[i, @y][0] == -2)
-						puts "@x: #{@x}, i: #{i}"
-						p @spiel[@x,i]
-						return false
+				if @y < yZiel
+					for i in @y..yZiel
+						if !(@spiel[xZiel,i][0] == 0 or @spiel[xZiel, i][0] == -2)
+							puts "@x: #{@x}, i: #{i}"
+							p @spiel[@x,i]
+							return false
+						end
+					end
+				else
+					for i in yZiel..@y
+						if !(@spiel[xZiel,i][0] == 0 or @spiel[xZiel, i][0] == -2)
+							puts "@x: #{@x}, i: #{i}"
+							p @spiel[@x,i]
+							return false
+						end
 					end
 				end
-			else
-				for i in xZiel..@x-1
-					if !(@spiel[i, @y][0] == 0 or @spiel[i, @y][0] == -2)
-						puts "@x: #{@x}, i: #{i}"
-						p @spiel[@x,i]
-						return false
-					end
-				end
+
+				return true
 			end
 
-			if @y < yZiel
-				for i in @y..yZiel
-					if !(@spiel[xZiel,i][0] == 0 or @spiel[xZiel, i][0] == -2)
-						puts "@x: #{@x}, i: #{i}"
-						p @spiel[@x,i]
-						return false
+			if startrichtung == 1 or startrichtung == 3
+				#Erst y, Dann X-Richtung
+				if @y < yZiel
+					for i in @y+1..yZiel
+						if !(@spiel[@x,i][0] == 0 or @spiel[@x, i][0] == -2)
+							puts "@x: #{@x}, i: #{i}"
+							p @spiel[@x,i]
+							return false
+						end
+					end
+				else
+					for i in yZiel..@y-1
+						if !(@spiel[@x,i][0] == 0 or @spiel[@x, i][0] == -2)
+							puts "Nach obenhin falsch"
+							puts "@x: #{@x}, i: #{i}"
+							p @spiel[@x,i]
+							return false
+						end
 					end
 				end
-			else
-				for i in yZiel..@y
-					if !(@spiel[xZiel,i][0] == 0 or @spiel[xZiel, i][0] == -2)
-						puts "@x: #{@x}, i: #{i}"
-						p @spiel[@x,i]
-						return false
-					end
-				end
-			end
 
-			return true
+				if @x < xZiel
+					for i in @x..xZiel
+						if !(@spiel[i, yZiel][0] == 0 or @spiel[i, yZiel][0] == -2)
+							puts "@x: #{@x}, i: #{i}"
+							p @spiel[@x,i]
+							return false
+						end
+					end
+				else
+					for i in xZiel..@x
+						if !(@spiel[i, yZiel][0] == 0 or @spiel[i, yZiel][0] == -2)
+							puts "@x: #{@x}, i: #{i}"
+							p @spiel[@x,i]
+							return false
+						end
+					end
+				end
+
+				return true
+			end
+		rescue
+			puts "FEHLER PASSIERT"
 		end
-
-		if startrichtung == 1 or startrichtung == 3
-			#Erst y, Dann X-Richtung
-			if @y < yZiel
-				for i in @y+1..yZiel
-					if !(@spiel[@x,i][0] == 0 or @spiel[@x, i][0] == -2)
-						puts "@x: #{@x}, i: #{i}"
-						p @spiel[@x,i]
-						return false
-					end
-				end
-			else
-				for i in yZiel..@y-1
-					if !(@spiel[@x,i][0] == 0 or @spiel[@x, i][0] == -2)
-						puts "Nach obenhin falsch"
-						puts "@x: #{@x}, i: #{i}"
-						p @spiel[@x,i]
-						return false
-					end
-				end
-			end
-
-			if @x < xZiel
-				for i in @x..xZiel
-					if !(@spiel[i, yZiel][0] == 0 or @spiel[i, yZiel][0] == -2)
-						puts "@x: #{@x}, i: #{i}"
-						p @spiel[@x,i]
-						return false
-					end
-				end
-			else
-				for i in xZiel..@x
-					if !(@spiel[i, yZiel][0] == 0 or @spiel[i, yZiel][0] == -2)
-						puts "@x: #{@x}, i: #{i}"
-						p @spiel[@x,i]
-						return false
-					end
-				end
-			end
-			
-			return true
-		end
-
 	end
 
 	#Implementation der Manhattanmetrik
