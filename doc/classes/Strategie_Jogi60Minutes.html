@@ -1,0 +1,410 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>Class: Strategie_Jogi60Minutes</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Script-Type" content="text/javascript" />
+  <link rel="stylesheet" href=".././rdoc-style.css" type="text/css" media="screen" />
+  <script type="text/javascript">
+  // <![CDATA[
+
+  function popupCode( url ) {
+    window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+  }
+
+  function toggleCode( id ) {
+    if ( document.getElementById )
+      elem = document.getElementById( id );
+    else if ( document.all )
+      elem = eval( "document.all." + id );
+    else
+      return false;
+
+    elemStyle = elem.style;
+    
+    if ( elemStyle.display != "block" ) {
+      elemStyle.display = "block"
+    } else {
+      elemStyle.display = "none"
+    }
+
+    return true;
+  }
+  
+  // Make codeblocks hidden by default
+  document.writeln( "<style type=\"text/css\">div.method-source-code { display: none }</style>" )
+  
+  // ]]>
+  </script>
+
+</head>
+<body>
+
+
+
+    <div id="classHeader">
+        <table class="header-table">
+        <tr class="top-aligned-row">
+          <td><strong>Class</strong></td>
+          <td class="class-name-in-header">Strategie_Jogi60Minutes</td>
+        </tr>
+        <tr class="top-aligned-row">
+            <td><strong>In:</strong></td>
+            <td>
+                <a href="../files/lib/strategie_jogi60minutes_rb.html">
+                lib/strategie_jogi60minutes.rb
+                </a>
+        <br />
+            </td>
+        </tr>
+
+        <tr class="top-aligned-row">
+            <td><strong>Parent:</strong></td>
+            <td>
+                <a href="Strategie.html">
+                Strategie
+               </a>
+            </td>
+        </tr>
+        </table>
+    </div>
+  <!-- banner header -->
+
+  <div id="bodyContent">
+
+
+
+  <div id="contextContent">
+
+    <div id="description">
+      <p>
+<a href="Strategie.html">Strategie</a> von Jogi Geschrieben mit einem Fixen
+Zeitlimit von 60 minuten
+</p>
+
+    </div>
+
+
+   </div>
+
+    <div id="method-list">
+      <h3 class="section-bar">Methods</h3>
+
+      <div class="name-list">
+      <a href="#M000079">checkx</a>&nbsp;&nbsp;
+      <a href="#M000078">freieSicht?</a>&nbsp;&nbsp;
+      <a href="#M000080">manhattan</a>&nbsp;&nbsp;
+      <a href="#M000081">nearest?</a>&nbsp;&nbsp;
+      <a href="#M000076">new</a>&nbsp;&nbsp;
+      <a href="#M000077">wohin?</a>&nbsp;&nbsp;
+      </div>
+    </div>
+
+  </div>
+
+
+    <!-- if includes -->
+
+    <div id="section">
+
+
+
+
+
+      
+
+
+    <!-- if method_list -->
+    <div id="methods">
+      <h3 class="section-bar">Public Class methods</h3>
+
+      <div id="method-M000076" class="method-detail">
+        <a name="M000076"></a>
+
+        <div class="method-heading">
+          <a href="#M000076" class="method-signature">
+          <span class="method-name">new</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000076-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000076-source">
+<pre>
+    <span class="ruby-comment cmt"># File lib/strategie_jogi60minutes.rb, line 9</span>
+ 9:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>
+10:                 <span class="ruby-ivar">@spiel</span> = <span class="ruby-keyword kw">nil</span>
+11:                 <span class="ruby-ivar">@apfel</span> = <span class="ruby-keyword kw">nil</span>
+12:                 <span class="ruby-ivar">@modus</span> = <span class="ruby-identifier">:check</span>
+13:         <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <h3 class="section-bar">Public Instance methods</h3>
+
+      <div id="method-M000079" class="method-detail">
+        <a name="M000079"></a>
+
+        <div class="method-heading">
+          <a href="#M000079" class="method-signature">
+          <span class="method-name">checkx</span><span class="method-args">(xZiel, yAchse)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000079-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000079-source">
+<pre>
+     <span class="ruby-comment cmt"># File lib/strategie_jogi60minutes.rb, line 141</span>
+141:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">checkx</span>(<span class="ruby-identifier">xZiel</span>, <span class="ruby-identifier">yAchse</span>)
+142:         <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000078" class="method-detail">
+        <a name="M000078"></a>
+
+        <div class="method-heading">
+          <a href="#M000078" class="method-signature">
+          <span class="method-name">freieSicht?</span><span class="method-args">(zielkoordinaten, startrichtung)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000078-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000078-source">
+<pre>
+     <span class="ruby-comment cmt"># File lib/strategie_jogi60minutes.rb, line 69</span>
+ 69:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">freieSicht?</span>(<span class="ruby-identifier">zielkoordinaten</span>, <span class="ruby-identifier">startrichtung</span>)
+ 70:                 <span class="ruby-identifier">xZiel</span> = <span class="ruby-identifier">zielkoordinaten</span>[<span class="ruby-value">0</span>]
+ 71:                 <span class="ruby-identifier">yZiel</span> = <span class="ruby-identifier">zielkoordinaten</span>[<span class="ruby-value">1</span>]
+ 72: 
+ 73:                 <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">startrichtung</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span> <span class="ruby-keyword kw">or</span> <span class="ruby-identifier">startrichtung</span> <span class="ruby-operator">==</span> <span class="ruby-value">2</span>
+ 74:                         <span class="ruby-comment cmt">#Erst x, dann y Richtund</span>
+ 75:                         <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@x</span> <span class="ruby-operator">&lt;</span> <span class="ruby-identifier">xZiel</span>
+ 76:                                 <span class="ruby-keyword kw">for</span> <span class="ruby-identifier">i</span> <span class="ruby-keyword kw">in</span> <span class="ruby-ivar">@x</span><span class="ruby-operator">+</span><span class="ruby-value">1</span><span class="ruby-operator">..</span><span class="ruby-identifier">xZiel</span>
+ 77:                                         <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@spiel</span>[<span class="ruby-identifier">i</span>, <span class="ruby-ivar">@y</span>] <span class="ruby-operator">!=</span> <span class="ruby-value">0</span> <span class="ruby-keyword kw">or</span> <span class="ruby-ivar">@spiel</span>[<span class="ruby-identifier">i</span>, <span class="ruby-ivar">@y</span>] <span class="ruby-operator">!=</span> <span class="ruby-value">-2</span>
+ 78:                                                 <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">false</span>
+ 79:                                         <span class="ruby-keyword kw">end</span>
+ 80:                                 <span class="ruby-keyword kw">end</span>
+ 81:                         <span class="ruby-keyword kw">else</span>
+ 82:                                 <span class="ruby-keyword kw">for</span> <span class="ruby-identifier">i</span> <span class="ruby-keyword kw">in</span> <span class="ruby-identifier">xZiel</span><span class="ruby-operator">..</span><span class="ruby-ivar">@x</span><span class="ruby-operator">-</span><span class="ruby-value">1</span>
+ 83:                                         <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@spiel</span>[<span class="ruby-identifier">i</span>, <span class="ruby-ivar">@y</span>] <span class="ruby-operator">!=</span> <span class="ruby-value">0</span> <span class="ruby-keyword kw">or</span> <span class="ruby-ivar">@spiel</span>[<span class="ruby-identifier">i</span>, <span class="ruby-ivar">@y</span>] <span class="ruby-operator">!=</span> <span class="ruby-value">-2</span>
+ 84:                                                 <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">false</span>
+ 85:                                         <span class="ruby-keyword kw">end</span>
+ 86:                                 <span class="ruby-keyword kw">end</span>
+ 87:                         <span class="ruby-keyword kw">end</span>
+ 88: 
+ 89:                         <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@y</span> <span class="ruby-operator">&lt;</span> <span class="ruby-identifier">yZiel</span>
+ 90:                                 <span class="ruby-keyword kw">for</span> <span class="ruby-identifier">i</span> <span class="ruby-keyword kw">in</span> <span class="ruby-ivar">@y</span><span class="ruby-operator">..</span><span class="ruby-identifier">yZiel</span>
+ 91:                                         <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@spiel</span>[<span class="ruby-identifier">xZiel</span>,<span class="ruby-identifier">i</span>] <span class="ruby-operator">!=</span> <span class="ruby-value">0</span> <span class="ruby-keyword kw">or</span> <span class="ruby-ivar">@spiel</span>[<span class="ruby-identifier">xZiel</span>, <span class="ruby-identifier">i</span>] <span class="ruby-operator">!=</span> <span class="ruby-value">-2</span>
+ 92:                                                 <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">false</span>
+ 93:                                         <span class="ruby-keyword kw">end</span>
+ 94:                                 <span class="ruby-keyword kw">end</span>
+ 95:                         <span class="ruby-keyword kw">else</span>
+ 96:                                 <span class="ruby-keyword kw">for</span> <span class="ruby-identifier">i</span> <span class="ruby-keyword kw">in</span> <span class="ruby-identifier">yZiel</span><span class="ruby-operator">..</span><span class="ruby-ivar">@y</span>
+ 97:                                         <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@spiel</span>[<span class="ruby-identifier">xZiel</span>,<span class="ruby-identifier">i</span>] <span class="ruby-operator">!=</span> <span class="ruby-value">0</span> <span class="ruby-keyword kw">or</span> <span class="ruby-ivar">@spiel</span>[<span class="ruby-identifier">xZiel</span>, <span class="ruby-identifier">i</span>] <span class="ruby-operator">!=</span> <span class="ruby-value">-2</span>
+ 98:                                                 <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">false</span>
+ 99:                                         <span class="ruby-keyword kw">end</span>
+100:                                 <span class="ruby-keyword kw">end</span>
+101:                         <span class="ruby-keyword kw">end</span>
+102: 
+103:                         <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">true</span>
+104:                 <span class="ruby-keyword kw">end</span>
+105: 
+106:                 <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">startrichtung</span> <span class="ruby-operator">==</span> <span class="ruby-value">1</span> <span class="ruby-keyword kw">or</span> <span class="ruby-identifier">startrichtung</span> <span class="ruby-operator">==</span> <span class="ruby-value">3</span>
+107:                         <span class="ruby-comment cmt">#Erst y, Dann X-Richtung</span>
+108:                         <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@y</span> <span class="ruby-operator">&lt;</span> <span class="ruby-identifier">yZiel</span>
+109:                                 <span class="ruby-keyword kw">for</span> <span class="ruby-identifier">i</span> <span class="ruby-keyword kw">in</span> <span class="ruby-ivar">@y</span><span class="ruby-operator">+</span><span class="ruby-value">1</span><span class="ruby-operator">..</span><span class="ruby-identifier">yZiel</span>
+110:                                         <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@spiel</span>[<span class="ruby-identifier">xZiel</span>,<span class="ruby-identifier">i</span>] <span class="ruby-operator">!=</span> <span class="ruby-value">0</span> <span class="ruby-keyword kw">or</span> <span class="ruby-ivar">@spiel</span>[<span class="ruby-identifier">xZiel</span>, <span class="ruby-identifier">i</span>] <span class="ruby-operator">!=</span> <span class="ruby-value">-2</span>
+111:                                                 <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">false</span>
+112:                                         <span class="ruby-keyword kw">end</span>
+113:                                 <span class="ruby-keyword kw">end</span>
+114:                         <span class="ruby-keyword kw">else</span>
+115:                                 <span class="ruby-keyword kw">for</span> <span class="ruby-identifier">i</span> <span class="ruby-keyword kw">in</span> <span class="ruby-identifier">yZiel</span><span class="ruby-operator">..</span><span class="ruby-ivar">@y</span><span class="ruby-operator">-</span><span class="ruby-value">1</span>
+116:                                         <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@spiel</span>[<span class="ruby-identifier">xZiel</span>,<span class="ruby-identifier">i</span>] <span class="ruby-operator">!=</span> <span class="ruby-value">0</span> <span class="ruby-keyword kw">or</span> <span class="ruby-ivar">@spiel</span>[<span class="ruby-identifier">xZiel</span>, <span class="ruby-identifier">i</span>] <span class="ruby-operator">!=</span> <span class="ruby-value">-2</span>
+117:                                                 <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">false</span>
+118:                                         <span class="ruby-keyword kw">end</span>
+119:                                 <span class="ruby-keyword kw">end</span>
+120:                         <span class="ruby-keyword kw">end</span>
+121: 
+122:                         <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@x</span> <span class="ruby-operator">&lt;</span> <span class="ruby-identifier">xZiel</span>
+123:                                 <span class="ruby-keyword kw">for</span> <span class="ruby-identifier">i</span> <span class="ruby-keyword kw">in</span> <span class="ruby-ivar">@x</span><span class="ruby-operator">..</span><span class="ruby-identifier">xZiel</span>
+124:                                         <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@spiel</span>[<span class="ruby-identifier">i</span>, <span class="ruby-ivar">@y</span>] <span class="ruby-operator">!=</span> <span class="ruby-value">0</span> <span class="ruby-keyword kw">or</span> <span class="ruby-ivar">@spiel</span>[<span class="ruby-identifier">i</span>, <span class="ruby-ivar">@y</span>] <span class="ruby-operator">!=</span> <span class="ruby-value">-2</span>
+125:                                                 <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">false</span>
+126:                                         <span class="ruby-keyword kw">end</span>
+127:                                 <span class="ruby-keyword kw">end</span>
+128:                         <span class="ruby-keyword kw">else</span>
+129:                                 <span class="ruby-keyword kw">for</span> <span class="ruby-identifier">i</span> <span class="ruby-keyword kw">in</span> <span class="ruby-identifier">xZiel</span><span class="ruby-operator">..</span><span class="ruby-ivar">@x</span>
+130:                                         <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@spiel</span>[<span class="ruby-identifier">i</span>, <span class="ruby-ivar">@y</span>] <span class="ruby-operator">!=</span> <span class="ruby-value">0</span> <span class="ruby-keyword kw">or</span> <span class="ruby-ivar">@spiel</span>[<span class="ruby-identifier">i</span>, <span class="ruby-ivar">@y</span>] <span class="ruby-operator">!=</span> <span class="ruby-value">-2</span>
+131:                                                 <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">false</span>
+132:                                         <span class="ruby-keyword kw">end</span>
+133:                                 <span class="ruby-keyword kw">end</span>
+134:                         <span class="ruby-keyword kw">end</span>
+135:                         
+136:                         <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">true</span>
+137:                 <span class="ruby-keyword kw">end</span>
+138: 
+139:         <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000080" class="method-detail">
+        <a name="M000080"></a>
+
+        <div class="method-heading">
+          <a href="#M000080" class="method-signature">
+          <span class="method-name">manhattan</span><span class="method-args">(koordinate1, koordinate2)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Implementation der Manhattanmetrik Input: Zwei Arrays von Koordinaten
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000080-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000080-source">
+<pre>
+     <span class="ruby-comment cmt"># File lib/strategie_jogi60minutes.rb, line 145</span>
+145:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">manhattan</span>(<span class="ruby-identifier">koordinate1</span>, <span class="ruby-identifier">koordinate2</span>)
+146:                 <span class="ruby-identifier">result</span> = (<span class="ruby-identifier">koordinate1</span>[<span class="ruby-value">0</span>]<span class="ruby-operator">-</span><span class="ruby-identifier">koordinate2</span>[<span class="ruby-value">0</span>]).<span class="ruby-identifier">abs</span>
+147:                 <span class="ruby-identifier">result</span> <span class="ruby-operator">+=</span> (<span class="ruby-identifier">koordinate1</span>[<span class="ruby-value">1</span>]<span class="ruby-operator">-</span><span class="ruby-identifier">koordinate2</span>[<span class="ruby-value">1</span>]).<span class="ruby-identifier">abs</span>
+148:                 <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">result</span>
+149:         <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000081" class="method-detail">
+        <a name="M000081"></a>
+
+        <div class="method-heading">
+          <a href="#M000081" class="method-signature">
+          <span class="method-name">nearest?</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Bin ich am Nächsten zum Apfel?
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000081-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000081-source">
+<pre>
+     <span class="ruby-comment cmt"># File lib/strategie_jogi60minutes.rb, line 152</span>
+152:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">nearest?</span>
+153:                 <span class="ruby-identifier">mydistance</span> = <span class="ruby-identifier">manhattan</span>([<span class="ruby-ivar">@x</span>,<span class="ruby-ivar">@y</span>],<span class="ruby-ivar">@apfel</span>)
+154:                 <span class="ruby-ivar">@spiel</span>.<span class="ruby-identifier">schlangen_pos</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">position</span><span class="ruby-operator">|</span> 
+155:                         <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">manhattan</span>(<span class="ruby-identifier">position</span>[<span class="ruby-value">0</span>, <span class="ruby-value">2</span>], <span class="ruby-ivar">@apfel</span>) <span class="ruby-operator">&lt;</span> <span class="ruby-identifier">mydistance</span>
+156:                                 <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">false</span>
+157:                         <span class="ruby-keyword kw">end</span>
+158:                 }
+159:                 <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">true</span>
+160:         <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000077" class="method-detail">
+        <a name="M000077"></a>
+
+        <div class="method-heading">
+          <a href="#M000077" class="method-signature">
+          <span class="method-name">wohin?</span><span class="method-args">(spiel)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000077-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000077-source">
+<pre>
+    <span class="ruby-comment cmt"># File lib/strategie_jogi60minutes.rb, line 15</span>
+15:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">wohin?</span>(<span class="ruby-identifier">spiel</span>)
+16:                 <span class="ruby-ivar">@spiel</span> = <span class="ruby-identifier">spiel</span>
+17:                 <span class="ruby-ivar">@x</span>,<span class="ruby-ivar">@y</span>,<span class="ruby-ivar">@dir</span> = <span class="ruby-identifier">spiel</span>.<span class="ruby-identifier">wo_bin_ich?</span>
+18:                 <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@apfel</span> <span class="ruby-operator">!=</span> <span class="ruby-identifier">spiel</span>.<span class="ruby-identifier">aepfel</span>[<span class="ruby-value">0</span>]
+19:                         <span class="ruby-ivar">@modus</span> = <span class="ruby-identifier">:check</span>
+20:                         <span class="ruby-ivar">@apfel</span> = <span class="ruby-identifier">spiel</span>.<span class="ruby-identifier">aepfel</span>[<span class="ruby-value">0</span>]
+21:                 <span class="ruby-keyword kw">end</span>
+22: 
+23:                 <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@modus</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">:check</span>
+24:                         <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">nearest?</span>
+25:                                 <span class="ruby-ivar">@modus</span> = <span class="ruby-identifier">:apfel</span>
+26:                         <span class="ruby-keyword kw">else</span>
+27:                                 <span class="ruby-ivar">@modus</span> = <span class="ruby-identifier">:flucht</span>
+28:                         <span class="ruby-keyword kw">end</span>
+29:                 <span class="ruby-keyword kw">end</span>
+30: 
+31:                 <span class="ruby-identifier">puts</span> <span class="ruby-ivar">@modus</span>
+32: 
+33:                 <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@modus</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">:apfel</span>
+34:                         <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@apfel</span>[<span class="ruby-value">0</span>] <span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@x</span>
+35:                                 <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">freieSicht?</span>(<span class="ruby-ivar">@apfel</span>, <span class="ruby-value">0</span>)
+36:                                         <span class="ruby-keyword kw">return</span> <span class="ruby-value">0</span>
+37:                                 <span class="ruby-keyword kw">end</span>
+38:                         <span class="ruby-keyword kw">else</span>
+39:                                 <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">freieSicht?</span>(<span class="ruby-ivar">@apfel</span>,<span class="ruby-value">2</span>)
+40:                                         <span class="ruby-keyword kw">return</span> <span class="ruby-value">2</span>
+41:                                 <span class="ruby-keyword kw">end</span>
+42:                         <span class="ruby-keyword kw">end</span>
+43: 
+44:                         <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@apfel</span>[<span class="ruby-value">1</span>] <span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@y</span>
+45:                                 <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">freieSicht?</span>(<span class="ruby-ivar">@apfel</span>, <span class="ruby-value">1</span>)
+46:                                         <span class="ruby-keyword kw">return</span> <span class="ruby-value">1</span>
+47:                                 <span class="ruby-keyword kw">end</span>
+48:                         <span class="ruby-keyword kw">else</span>
+49:                                 <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">freieSicht?</span>(<span class="ruby-ivar">@apfel</span>,<span class="ruby-value">3</span>)
+50:                                         <span class="ruby-keyword kw">return</span> <span class="ruby-value">3</span>
+51:                                 <span class="ruby-keyword kw">end</span>
+52:                         <span class="ruby-keyword kw">end</span>
+53: 
+54:                         <span class="ruby-comment cmt">#keine Freie Sicht:</span>
+55:                         
+56:                         <span class="ruby-ivar">@modus</span> = <span class="ruby-identifier">:flucht</span>
+57:                 <span class="ruby-keyword kw">end</span>
+58: 
+59: 
+60:                 <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@modus</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">:flucht</span>
+61:                         <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">rand</span>(<span class="ruby-value">3</span>)
+62:                                         
+63:                 
+64:                         <span class="ruby-ivar">@modus</span> = <span class="ruby-identifier">check</span>
+65: 
+66:                 <span class="ruby-keyword kw">end</span>
+67:         <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+
+
+  </div>
+
+
+<div id="validator-badges">
+  <p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+</div>
+
+</body>
+</html>

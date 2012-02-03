@@ -190,6 +190,15 @@ class Spiel
   def [](x,y)
     return @feld[x,y]
   end
+
+	#Gibt das feld als String aus
+	#
+	#Diese Methode wurde eingefügt, um den zugriff auf die Feld-Klasse zu vermeiden
+	#und um dem Ziel gerecht zu werden, dass die Spiel-Klasse die Koordination übernimmt.
+	#Vorerst wird noch auf die Methode in Feld verlinkt, das soll sich aber noch ändern
+	def getFeld
+		return @feld.to_s
+	end
   
 	private
   # Positioniert einen neuen Apfel so, dass auf den acht

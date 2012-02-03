@@ -11,7 +11,7 @@ spiel = Spiel.new(38, 14, strategien, 0)
 i = 0
 begin
   res = spiel.aktualisieren
-  puts spiel.feld.to_s
+  puts spiel.getFeld
   #puts res
   i += 1
 end until i>300 or res.index(true) == nil

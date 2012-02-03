@@ -76,7 +76,7 @@ def match(strategien, perm)
     begin
       res = spiel.aktualisieren
       schritt += 1
-      felder.push(spiel.feld.to_s)
+      felder.push(spiel.getFeld)
       felder.shift if (felder.size>10)
       l = 0
       res.each_index {|i|
