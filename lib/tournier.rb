@@ -128,6 +128,21 @@ def write_unfaelle(strats, punkte, punktequadrate, punkte_n)
   }
 end
 
+#fragt den User nach den Strategien, die mitmachen sollen
+def strategieabfrage(strategien)
+	pdebug "Folgende Strategien stehen zur Verfügung:"
+	strategien.each_index { |i|
+		pdebug i.to_s + ": " + strategien[i].to_s + "\n"
+	}
+	pdebug "Bitte die Nummern aller Teilnehmer durch Whitespaces getrennt angeben:"
+	string = gets.chomp
+	selected = Array.new
+	string.split.each { |number| 
+		selected.push(strategien[number.to_i])
+	}
+	return selected
+end
+
 $match_num = 0
 
 # Strategie-Dateien einlesen
@@ -144,20 +159,22 @@ allestrategien = Module.constants.grep(/^Strategie./).sort.collect{|s| Kernel.co
 # allestrategien[allestrategien.index(Strategie_simon4)] = Strategie_zeno_alt
 # allestrategien[allestrategien.index(Strategie_Pa2)] = Strategie_zeno
 
-$unfaelle = Array.new(allestrategien.size,"")
+gewaehltestrategien = strategieabfrage(allestrategien)
+
+$unfaelle = Array.new(gewaehltestrategien.size,"")
 
 numstrat = 4
-k = Kombinationen.new(allestrategien.size,numstrat)
+k = Kombinationen.new(gewaehltestrategien.size,numstrat)
 
-punkte = Array.new(allestrategien.size,0)
-punktequadrate = Array.new(allestrategien.size,0)
-punkte_n = Array.new(allestrategien.size,0)
+punkte = Array.new(gewaehltestrategien.size,0)
+punktequadrate = Array.new(gewaehltestrategien.size,0)
+punkte_n = Array.new(gewaehltestrategien.size,0)
 
 k.each {|a|
   10.times {
     aa = (a.collect {|i| i-1}).sort_by {rand}
     strategien = aa.collect{|i|
-      allestrategien[i].new
+      gewaehltestrategien[i].new
     }
     pkte = match(strategien,aa)
     numstrat.times {|i|
@@ -166,9 +183,9 @@ k.each {|a|
       punkte_n[aa[i]] += 1
     }
     pdebug "Nach match #{aa.inspect} sind die Punkte:"
-    allestrategien.size.times {|i|
-      pdebug "#{allestrategien[i]} : #{punkte[i]}"
+    gewaehltestrategien.size.times {|i|
+      pdebug "#{gewaehltestrategien[i]} : #{punkte[i]}"
     }
   }
-  write_unfaelle(allestrategien, punkte, punktequadrate, punkte_n)
+  write_unfaelle(gewaehltestrategien, punkte, punktequadrate, punkte_n)
 }
