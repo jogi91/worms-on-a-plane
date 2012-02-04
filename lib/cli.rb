@@ -1,11 +1,28 @@
-#CommandLineInterface
+#=CommandLineInterface
 #
 #Wird vielleicht einmal alles übernehmen, die Turniere, 
 #die Kommandozielenversion und die MCUF-Version
 #
 #Im Moment soll es aber nur das Turnier verwalten,
 #der ganze Rest läuft über refactoring
+#
+#GetoptLong: http://ruby-doc.org/stdlib-1.8.7/libdoc/getoptlong/rdoc/index.html
 
+#Parser für die Kommandozeilenargumente einbinden
+require "getoptlong"
+#kann den Kommentar am Anfang des Files ausgeben
+require "rdoc/usage"
+
+opts = GetoptLong.new(
+	[ "--help", "-h", GetoptLong::NO_ARGUMENT]
+)
+
+opts.each { |opt, arg| 
+	case opt
+	when "--help"
+		RDoc::usage
+	end
+}
 
 #Die Turniermethoden einbinden
 require "tournier"
