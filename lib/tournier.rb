@@ -1,6 +1,7 @@
 module Tournier
 
 	require "spiel"
+	require "kombinationen"
 
 	def get_bytes(color)
 		r = ""
@@ -134,5 +135,58 @@ module Tournier
 			selected.push(strategien[number.to_i])
 		}
 		return selected
+	end
+
+	#spielt ein Turnier komplett durch
+	def berechneTurnier (includeDir)
+		$match_num = 0
+
+		#wo wurde das Skript gestartet?
+		startort = Dir.pwd
+
+		#zu den Include-Files
+		Dir.chdir(includeDir)
+
+		# Strategie-Dateien einlesen
+		Dir.glob("strategie*.rb") {|stratfile|
+			require stratfile
+		}
+
+		#und  zurück
+		Dir.chdir(startort)
+
+		# Damit erhalten wir die Klassen aller Strategie-Objekte.
+		allestrategien = Module.constants.grep(/^Strategie./).sort.collect{|s| Kernel.const_get(s)}
+
+		gewaehltestrategien = strategieabfrage(allestrategien)
+
+		$unfaelle = Array.new(gewaehltestrategien.size,"")
+
+		numstrat = 4
+		k = Kombinationen.new(gewaehltestrategien.size,numstrat)
+
+		punkte = Array.new(gewaehltestrategien.size,0)
+		punktequadrate = Array.new(gewaehltestrategien.size,0)
+		punkte_n = Array.new(gewaehltestrategien.size,0)
+
+		k.each {|a|
+			10.times {
+				aa = (a.collect {|i| i-1}).sort_by {rand}
+				strategien = aa.collect{|i|
+					gewaehltestrategien[i].new
+				}
+				pkte = match(strategien,aa)
+				numstrat.times {|i|
+					punkte[aa[i]] += pkte[i]
+					punktequadrate[aa[i]] += pkte[i]**2
+					punkte_n[aa[i]] += 1
+				}
+				pdebug "Nach match #{aa.inspect} sind die Punkte:"
+				gewaehltestrategien.size.times {|i|
+					pdebug "#{gewaehltestrategien[i]} : #{punkte[i]}"
+				}
+			}
+			write_unfaelle(gewaehltestrategien, punkte, punktequadrate, punkte_n)
+		}
 	end
 end
