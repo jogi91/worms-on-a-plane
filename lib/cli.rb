@@ -16,11 +16,14 @@ require "rdoc/usage"
 opts = GetoptLong.new(
 	[ "--help", "-h", GetoptLong::NO_ARGUMENT],
 	[ "--include-dir", "-I", GetoptLong::REQUIRED_ARGUMENT],
-	[ "--output-dir", "-o", GetoptLong::REQUIRED_ARGUMENT]
+	[ "--output-dir", "-o", GetoptLong::REQUIRED_ARGUMENT],
+	[ "--verbose", "-v", GetoptLong::NO_ARGUMENT],
 )
 
 includeDir = "."
 outputDir = "output"
+verbose = false
+quiet = false
 
 opts.each { |opt, arg| 
 	case opt
@@ -30,6 +33,8 @@ opts.each { |opt, arg|
 		includeDir = arg
 	when "--output-dir"
 		outputDir = arg
+	when "--verbose"
+		verbose =	true
 	end
 }
 
@@ -39,5 +44,10 @@ include Tournier
 
 # bringt die Schlangen zum Schweigen
 require "kernel"
+include Kernel
+
+unless verbose
+	silence
+end
 
 berechneTurnier(includeDir, outputDir)

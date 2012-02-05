@@ -55,8 +55,8 @@
         <tr class="top-aligned-row">
             <td><strong>In:</strong></td>
             <td>
-                <a href="../files/lib/cli_rb.html">
-                lib/cli.rb
+                <a href="../files/lib/kernel_rb.html">
+                lib/kernel.rb
                 </a>
         <br />
             </td>
@@ -76,10 +76,6 @@
       <p>
 bringt die Schlangen zum Schweigen
 </p>
-<h2>TODO:</h2>
-<p>
-sollte nur auf wunsch eingebunden werden können
-</p>
 
     </div>
 
@@ -90,8 +86,9 @@ sollte nur auf wunsch eingebunden werden können
       <h3 class="section-bar">Methods</h3>
 
       <div class="name-list">
-      <a href="#M000100">print</a>&nbsp;&nbsp;
-      <a href="#M000099">puts</a>&nbsp;&nbsp;
+      <a href="#M000102">print</a>&nbsp;&nbsp;
+      <a href="#M000101">puts</a>&nbsp;&nbsp;
+      <a href="#M000100">silence</a>&nbsp;&nbsp;
       </div>
     </div>
 
@@ -131,12 +128,56 @@ sollte nur auf wunsch eingebunden werden können
     <div id="methods">
       <h3 class="section-bar">Public Instance methods</h3>
 
+      <div id="method-M000102" class="method-detail">
+        <a name="M000102"></a>
+
+        <div class="method-heading">
+          <a href="#M000102" class="method-signature">
+          <span class="method-name">print</span><span class="method-args">(*c)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000102-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000102-source">
+<pre>
+    <span class="ruby-comment cmt"># File lib/kernel.rb, line 10</span>
+10:                 <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">print</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">c</span>)
+11:                 <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000101" class="method-detail">
+        <a name="M000101"></a>
+
+        <div class="method-heading">
+          <a href="#M000101" class="method-signature">
+          <span class="method-name">puts</span><span class="method-args">(*c)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000101-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000101-source">
+<pre>
+   <span class="ruby-comment cmt"># File lib/kernel.rb, line 8</span>
+8:                 <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">puts</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">c</span>)
+9:                 <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
       <div id="method-M000100" class="method-detail">
         <a name="M000100"></a>
 
         <div class="method-heading">
           <a href="#M000100" class="method-signature">
-          <span class="method-name">print</span><span class="method-args">(*c)</span>
+          <span class="method-name">silence</span><span class="method-args">()</span>
           </a>
         </div>
       
@@ -145,31 +186,13 @@ sollte nur auf wunsch eingebunden werden können
             onclick="toggleCode('M000100-source');return false;">[Source]</a></p>
           <div class="method-source-code" id="M000100-source">
 <pre>
-    <span class="ruby-comment cmt"># File lib/cli.rb, line 23</span>
-23:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">print</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">c</span>)
-24:         <span class="ruby-keyword kw">end</span>
-</pre>
-          </div>
-        </div>
-      </div>
-
-      <div id="method-M000099" class="method-detail">
-        <a name="M000099"></a>
-
-        <div class="method-heading">
-          <a href="#M000099" class="method-signature">
-          <span class="method-name">puts</span><span class="method-args">(*c)</span>
-          </a>
-        </div>
-      
-        <div class="method-description">
-          <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000099-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000099-source">
-<pre>
-    <span class="ruby-comment cmt"># File lib/cli.rb, line 20</span>
-20:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">puts</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">c</span>)
-21:         <span class="ruby-keyword kw">end</span>
+    <span class="ruby-comment cmt"># File lib/kernel.rb, line 7</span>
+ 7:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">silence</span>
+ 8:                 <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">puts</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">c</span>)
+ 9:                 <span class="ruby-keyword kw">end</span>
+10:                 <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">print</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">c</span>)
+11:                 <span class="ruby-keyword kw">end</span>
+12:         <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>

@@ -80,6 +80,7 @@
       <h3 class="section-bar">Methods</h3>
 
       <div class="name-list">
+      <a href="#M000099">berechneTurnier</a>&nbsp;&nbsp;
       <a href="#M000094">get_bytes</a>&nbsp;&nbsp;
       <a href="#M000095">make_animation</a>&nbsp;&nbsp;
       <a href="#M000096">match</a>&nbsp;&nbsp;
@@ -106,6 +107,86 @@
     <div id="methods">
       <h3 class="section-bar">Public Instance methods</h3>
 
+      <div id="method-M000099" class="method-detail">
+        <a name="M000099"></a>
+
+        <div class="method-heading">
+          <a href="#M000099" class="method-signature">
+          <span class="method-name">berechneTurnier</span><span class="method-args">(includeDir, outputDir)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+spielt ein Turnier komplett durch
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000099-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000099-source">
+<pre>
+     <span class="ruby-comment cmt"># File lib/tournier.rb, line 141</span>
+141:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">berechneTurnier</span> (<span class="ruby-identifier">includeDir</span>, <span class="ruby-identifier">outputDir</span>)
+142:                 <span class="ruby-identifier">$match_num</span> = <span class="ruby-value">0</span>
+143: 
+144:                 <span class="ruby-comment cmt">#wo wurde das Skript gestartet?</span>
+145:                 <span class="ruby-identifier">startort</span> = <span class="ruby-constant">Dir</span>.<span class="ruby-identifier">pwd</span>
+146: 
+147:                 <span class="ruby-comment cmt">#zu den Include-Files</span>
+148:                 <span class="ruby-constant">Dir</span>.<span class="ruby-identifier">chdir</span>(<span class="ruby-identifier">includeDir</span>)
+149: 
+150:                 <span class="ruby-comment cmt"># Strategie-Dateien einlesen</span>
+151:                 <span class="ruby-constant">Dir</span>.<span class="ruby-identifier">glob</span>(<span class="ruby-value str">&quot;strategie*.rb&quot;</span>) {<span class="ruby-operator">|</span><span class="ruby-identifier">stratfile</span><span class="ruby-operator">|</span>
+152:                         <span class="ruby-identifier">require</span> <span class="ruby-identifier">stratfile</span>
+153:                 }
+154: 
+155:                 <span class="ruby-comment cmt">#und  zurück</span>
+156:                 <span class="ruby-constant">Dir</span>.<span class="ruby-identifier">chdir</span>(<span class="ruby-identifier">startort</span>)
+157:                 <span class="ruby-comment cmt">#output setzen</span>
+158:                 <span class="ruby-constant">Dir</span>.<span class="ruby-identifier">chdir</span>(<span class="ruby-identifier">outputDir</span>)
+159: 
+160:                 <span class="ruby-comment cmt"># Damit erhalten wir die Klassen aller Strategie-Objekte.</span>
+161:                 <span class="ruby-identifier">allestrategien</span> = <span class="ruby-constant">Module</span>.<span class="ruby-identifier">constants</span>.<span class="ruby-identifier">grep</span>(<span class="ruby-regexp re">/^Strategie./</span>).<span class="ruby-identifier">sort</span>.<span class="ruby-identifier">collect</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">s</span><span class="ruby-operator">|</span> <span class="ruby-constant">Kernel</span>.<span class="ruby-identifier">const_get</span>(<span class="ruby-identifier">s</span>)}
+162: 
+163:                 <span class="ruby-identifier">gewaehltestrategien</span> = <span class="ruby-identifier">strategieabfrage</span>(<span class="ruby-identifier">allestrategien</span>)
+164: 
+165:                 <span class="ruby-identifier">$unfaelle</span> = <span class="ruby-constant">Array</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">gewaehltestrategien</span>.<span class="ruby-identifier">size</span>,<span class="ruby-value str">&quot;&quot;</span>)
+166: 
+167:                 <span class="ruby-identifier">numstrat</span> = <span class="ruby-value">4</span>
+168:                 <span class="ruby-identifier">k</span> = <span class="ruby-constant">Kombinationen</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">gewaehltestrategien</span>.<span class="ruby-identifier">size</span>,<span class="ruby-identifier">numstrat</span>)
+169: 
+170:                 <span class="ruby-identifier">punkte</span> = <span class="ruby-constant">Array</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">gewaehltestrategien</span>.<span class="ruby-identifier">size</span>,<span class="ruby-value">0</span>)
+171:                 <span class="ruby-identifier">punktequadrate</span> = <span class="ruby-constant">Array</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">gewaehltestrategien</span>.<span class="ruby-identifier">size</span>,<span class="ruby-value">0</span>)
+172:                 <span class="ruby-identifier">punkte_n</span> = <span class="ruby-constant">Array</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">gewaehltestrategien</span>.<span class="ruby-identifier">size</span>,<span class="ruby-value">0</span>)
+173: 
+174:                 <span class="ruby-identifier">k</span>.<span class="ruby-identifier">each</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">a</span><span class="ruby-operator">|</span>
+175:                         <span class="ruby-value">10</span>.<span class="ruby-identifier">times</span> {
+176:                                 <span class="ruby-identifier">aa</span> = (<span class="ruby-identifier">a</span>.<span class="ruby-identifier">collect</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">i</span><span class="ruby-operator">|</span> <span class="ruby-identifier">i</span><span class="ruby-operator">-</span><span class="ruby-value">1</span>}).<span class="ruby-identifier">sort_by</span> {<span class="ruby-identifier">rand</span>}
+177:                                 <span class="ruby-identifier">strategien</span> = <span class="ruby-identifier">aa</span>.<span class="ruby-identifier">collect</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">i</span><span class="ruby-operator">|</span>
+178:                                         <span class="ruby-identifier">gewaehltestrategien</span>[<span class="ruby-identifier">i</span>].<span class="ruby-identifier">new</span>
+179:                                 }
+180:                                 <span class="ruby-identifier">pkte</span> = <span class="ruby-identifier">match</span>(<span class="ruby-identifier">strategien</span>,<span class="ruby-identifier">aa</span>)
+181:                                 <span class="ruby-identifier">numstrat</span>.<span class="ruby-identifier">times</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">i</span><span class="ruby-operator">|</span>
+182:                                         <span class="ruby-identifier">punkte</span>[<span class="ruby-identifier">aa</span>[<span class="ruby-identifier">i</span>]] <span class="ruby-operator">+=</span> <span class="ruby-identifier">pkte</span>[<span class="ruby-identifier">i</span>]
+183:                                         <span class="ruby-identifier">punktequadrate</span>[<span class="ruby-identifier">aa</span>[<span class="ruby-identifier">i</span>]] <span class="ruby-operator">+=</span> <span class="ruby-identifier">pkte</span>[<span class="ruby-identifier">i</span>]<span class="ruby-operator">**</span><span class="ruby-value">2</span>
+184:                                         <span class="ruby-identifier">punkte_n</span>[<span class="ruby-identifier">aa</span>[<span class="ruby-identifier">i</span>]] <span class="ruby-operator">+=</span> <span class="ruby-value">1</span>
+185:                                 }
+186:                                 <span class="ruby-identifier">pdebug</span> <span class="ruby-node">&quot;Nach match #{aa.inspect} sind die Punkte:&quot;</span>
+187:                                 <span class="ruby-identifier">gewaehltestrategien</span>.<span class="ruby-identifier">size</span>.<span class="ruby-identifier">times</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">i</span><span class="ruby-operator">|</span>
+188:                                         <span class="ruby-identifier">pdebug</span> <span class="ruby-node">&quot;#{gewaehltestrategien[i]} : #{punkte[i]}&quot;</span>
+189:                                 }
+190:                         }
+191:                         <span class="ruby-identifier">write_unfaelle</span>(<span class="ruby-identifier">gewaehltestrategien</span>, <span class="ruby-identifier">punkte</span>, <span class="ruby-identifier">punktequadrate</span>, <span class="ruby-identifier">punkte_n</span>)
+192:                 }
+193: 
+194: 
+195:                 <span class="ruby-comment cmt">#wieder zurück an den anfang</span>
+196:                 <span class="ruby-constant">Dir</span>.<span class="ruby-identifier">chdir</span>(<span class="ruby-identifier">startort</span>)
+197:         <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
       <div id="method-M000094" class="method-detail">
         <a name="M000094"></a>
 
@@ -120,14 +201,14 @@
             onclick="toggleCode('M000094-source');return false;">[Source]</a></p>
           <div class="method-source-code" id="M000094-source">
 <pre>
-    <span class="ruby-comment cmt"># File lib/tournier.rb, line 5</span>
- 5:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">get_bytes</span>(<span class="ruby-identifier">color</span>)
- 6:                 <span class="ruby-identifier">r</span> = <span class="ruby-value str">&quot;&quot;</span>
- 7:                 <span class="ruby-identifier">color</span>.<span class="ruby-identifier">split</span>(<span class="ruby-value str">&quot; &quot;</span>).<span class="ruby-identifier">each</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">n</span><span class="ruby-operator">|</span>
- 8:                         <span class="ruby-identifier">r</span> <span class="ruby-operator">+=</span> <span class="ruby-identifier">n</span>.<span class="ruby-identifier">to_i</span>.<span class="ruby-identifier">chr</span>
- 9:                 }
-10:                 <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">r</span>
-11:         <span class="ruby-keyword kw">end</span>
+    <span class="ruby-comment cmt"># File lib/tournier.rb, line 6</span>
+ 6:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">get_bytes</span>(<span class="ruby-identifier">color</span>)
+ 7:                 <span class="ruby-identifier">r</span> = <span class="ruby-value str">&quot;&quot;</span>
+ 8:                 <span class="ruby-identifier">color</span>.<span class="ruby-identifier">split</span>(<span class="ruby-value str">&quot; &quot;</span>).<span class="ruby-identifier">each</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">n</span><span class="ruby-operator">|</span>
+ 9:                         <span class="ruby-identifier">r</span> <span class="ruby-operator">+=</span> <span class="ruby-identifier">n</span>.<span class="ruby-identifier">to_i</span>.<span class="ruby-identifier">chr</span>
+10:                 }
+11:                 <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">r</span>
+12:         <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
@@ -147,55 +228,55 @@
             onclick="toggleCode('M000095-source');return false;">[Source]</a></p>
           <div class="method-source-code" id="M000095-source">
 <pre>
-    <span class="ruby-comment cmt"># File lib/tournier.rb, line 13</span>
-13:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">make_animation</span>(<span class="ruby-identifier">felder</span>, <span class="ruby-identifier">strats</span>, <span class="ruby-identifier">matchnum</span>, <span class="ruby-identifier">schritt</span>)
-14:                 <span class="ruby-identifier">colors</span> = [<span class="ruby-value str">&quot;255 0 0&quot;</span>, <span class="ruby-value str">&quot;0 255 0&quot;</span>, <span class="ruby-value str">&quot;0 0 255&quot;</span>, 
-15:                                                 <span class="ruby-value str">&quot;200 200 0&quot;</span>, <span class="ruby-value str">&quot;0 200 200&quot;</span>, <span class="ruby-value str">&quot;200 0 200&quot;</span>,
-16:                                                 <span class="ruby-value str">&quot;100 100 100&quot;</span>,<span class="ruby-value str">&quot;100 0 0&quot;</span>, <span class="ruby-value str">&quot;0 100 0&quot;</span>, <span class="ruby-value str">&quot;0 0 100&quot;</span>]
-17:                 <span class="ruby-identifier">transp</span> = <span class="ruby-value str">&quot;123 123 123&quot;</span>
-18:                 <span class="ruby-identifier">black</span> = <span class="ruby-value str">&quot;0 0 0&quot;</span>
-19:                 <span class="ruby-identifier">white</span> = <span class="ruby-value str">&quot;255 255 255&quot;</span>
-20:                 <span class="ruby-identifier">prefix</span> = <span class="ruby-identifier">sprintf</span>(<span class="ruby-value str">&quot;%04d-%04d&quot;</span>,<span class="ruby-identifier">matchnum</span>,<span class="ruby-identifier">schritt</span>)
-21:                 <span class="ruby-identifier">filename</span> = <span class="ruby-value str">&quot;00&quot;</span>
-22:                 <span class="ruby-identifier">convert</span> = <span class="ruby-value str">&quot;convert -delay 50 -dispose None -layers optimize&quot;</span>
-23:                 <span class="ruby-keyword kw">for</span> <span class="ruby-identifier">i</span> <span class="ruby-keyword kw">in</span> <span class="ruby-value">0</span><span class="ruby-operator">...</span><span class="ruby-identifier">felder</span>.<span class="ruby-identifier">size</span>
-24:                         <span class="ruby-keyword kw">if</span> <span class="ruby-keyword kw">false</span> <span class="ruby-keyword kw">and</span> <span class="ruby-identifier">i</span><span class="ruby-operator">&gt;</span><span class="ruby-value">0</span>  <span class="ruby-comment cmt"># and i&lt;felder.size-1</span>
-25:                                 <span class="ruby-identifier">convert</span> <span class="ruby-operator">+=</span> <span class="ruby-value str">&quot; -transparent \&quot;rgb(123,123,123)\&quot;&quot;</span>
-26:                         <span class="ruby-keyword kw">end</span>
-27:                         <span class="ruby-identifier">convert</span> <span class="ruby-operator">+=</span> <span class="ruby-node">&quot; output/#{filename}.ppm&quot;</span>
-28:                         <span class="ruby-identifier">ppm</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">open</span>(<span class="ruby-node">&quot;output/#{filename}.ppm&quot;</span>, <span class="ruby-value str">&quot;w&quot;</span>)
-29:                         <span class="ruby-identifier">filename</span> = <span class="ruby-identifier">filename</span>.<span class="ruby-identifier">succ</span>
-30:                         <span class="ruby-identifier">ppm</span>.<span class="ruby-identifier">print</span> <span class="ruby-value str">&quot;P6\n40 30 255\n&quot;</span>
-31:                         <span class="ruby-keyword kw">for</span> <span class="ruby-identifier">p</span> <span class="ruby-keyword kw">in</span> <span class="ruby-value">0</span><span class="ruby-operator">...</span><span class="ruby-identifier">felder</span>[<span class="ruby-identifier">i</span>].<span class="ruby-identifier">size</span>
-32:                                 <span class="ruby-identifier">c</span> = <span class="ruby-identifier">felder</span>[<span class="ruby-identifier">i</span>][<span class="ruby-identifier">p</span>].<span class="ruby-identifier">chr</span>
-33:                                 <span class="ruby-keyword kw">if</span> <span class="ruby-keyword kw">false</span> <span class="ruby-keyword kw">and</span> <span class="ruby-identifier">i</span><span class="ruby-operator">&gt;</span><span class="ruby-value">0</span>  <span class="ruby-comment cmt"># and i&lt;felder.size-1</span>
-34:                                         <span class="ruby-identifier">cc</span> = <span class="ruby-identifier">felder</span>[<span class="ruby-identifier">i</span><span class="ruby-operator">-</span><span class="ruby-value">1</span>][<span class="ruby-identifier">p</span>].<span class="ruby-identifier">chr</span>
-35:                                 <span class="ruby-keyword kw">else</span>
-36:                                         <span class="ruby-identifier">cc</span> = <span class="ruby-value str">&quot;9&quot;</span>
-37:                                 <span class="ruby-keyword kw">end</span>
-38:                                 <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">c</span> <span class="ruby-operator">==</span> <span class="ruby-value str">&quot;\n&quot;</span>
-39:                                         <span class="ruby-comment cmt">#        ppm.print &quot;\n&quot;</span>
-40:                                 <span class="ruby-keyword kw">else</span>
-41:                                         <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">c!</span>=<span class="ruby-identifier">cc</span>
-42:                                                 <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">c</span><span class="ruby-operator">==</span> <span class="ruby-value str">&quot;.&quot;</span>
-43:                                                         <span class="ruby-identifier">ppm</span>.<span class="ruby-identifier">print</span> <span class="ruby-identifier">get_bytes</span>(<span class="ruby-identifier">white</span>)
-44:                                                 <span class="ruby-keyword kw">elsif</span> <span class="ruby-identifier">c</span> <span class="ruby-operator">==</span> <span class="ruby-value str">&quot;#&quot;</span> <span class="ruby-keyword kw">or</span> <span class="ruby-identifier">c</span><span class="ruby-operator">==</span><span class="ruby-value str">&quot;*&quot;</span>
-45:                                                         <span class="ruby-identifier">ppm</span>.<span class="ruby-identifier">print</span> <span class="ruby-identifier">get_bytes</span>(<span class="ruby-identifier">black</span>)
-46:                                                 <span class="ruby-keyword kw">elsif</span> <span class="ruby-identifier">c</span>.<span class="ruby-identifier">to_i</span><span class="ruby-operator">&gt;</span><span class="ruby-value">0</span>
-47:                                                         <span class="ruby-identifier">ppm</span>.<span class="ruby-identifier">print</span> <span class="ruby-identifier">get_bytes</span>(<span class="ruby-identifier">colors</span>[<span class="ruby-identifier">strats</span>[<span class="ruby-identifier">c</span>.<span class="ruby-identifier">to_i</span><span class="ruby-operator">-</span><span class="ruby-value">1</span>]])
-48:                                                 <span class="ruby-keyword kw">end</span>
-49:                                         <span class="ruby-keyword kw">else</span>
-50:                                                 <span class="ruby-identifier">ppm</span>.<span class="ruby-identifier">print</span> <span class="ruby-identifier">get_bytes</span>(<span class="ruby-identifier">transp</span>)
-51:                                         <span class="ruby-keyword kw">end</span>
-52:                                 <span class="ruby-keyword kw">end</span>
-53:                         <span class="ruby-keyword kw">end</span>
-54:                         <span class="ruby-identifier">ppm</span>.<span class="ruby-identifier">close</span>
-55:                 <span class="ruby-keyword kw">end</span>
-56:                 <span class="ruby-identifier">convert</span> <span class="ruby-operator">+=</span> <span class="ruby-node">&quot; -loop 0 output/#{prefix}.gif&quot;</span>
-57:                 <span class="ruby-identifier">pdebug</span> <span class="ruby-identifier">convert</span>
-58:                 <span class="ruby-node">`#{convert}`</span>
-59:                 <span class="ruby-keyword kw">return</span> <span class="ruby-node">&quot;&lt;img width=\&quot;400\&quot; height=\&quot;300\&quot; alt=\&quot;Match #{matchnum}, Schritte #{schritt-10} bis #{schritt}\&quot; src=\&quot;#{prefix}.gif\&quot;&gt;&quot;</span>
-60:         <span class="ruby-keyword kw">end</span>
+    <span class="ruby-comment cmt"># File lib/tournier.rb, line 14</span>
+14:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">make_animation</span>(<span class="ruby-identifier">felder</span>, <span class="ruby-identifier">strats</span>, <span class="ruby-identifier">matchnum</span>, <span class="ruby-identifier">schritt</span>)
+15:                 <span class="ruby-identifier">colors</span> = [<span class="ruby-value str">&quot;255 0 0&quot;</span>, <span class="ruby-value str">&quot;0 255 0&quot;</span>, <span class="ruby-value str">&quot;0 0 255&quot;</span>, 
+16:                                                 <span class="ruby-value str">&quot;200 200 0&quot;</span>, <span class="ruby-value str">&quot;0 200 200&quot;</span>, <span class="ruby-value str">&quot;200 0 200&quot;</span>,
+17:                                                 <span class="ruby-value str">&quot;100 100 100&quot;</span>,<span class="ruby-value str">&quot;100 0 0&quot;</span>, <span class="ruby-value str">&quot;0 100 0&quot;</span>, <span class="ruby-value str">&quot;0 0 100&quot;</span>]
+18:                 <span class="ruby-identifier">transp</span> = <span class="ruby-value str">&quot;123 123 123&quot;</span>
+19:                 <span class="ruby-identifier">black</span> = <span class="ruby-value str">&quot;0 0 0&quot;</span>
+20:                 <span class="ruby-identifier">white</span> = <span class="ruby-value str">&quot;255 255 255&quot;</span>
+21:                 <span class="ruby-identifier">prefix</span> = <span class="ruby-identifier">sprintf</span>(<span class="ruby-value str">&quot;%04d-%04d&quot;</span>,<span class="ruby-identifier">matchnum</span>,<span class="ruby-identifier">schritt</span>)
+22:                 <span class="ruby-identifier">filename</span> = <span class="ruby-value str">&quot;00&quot;</span>
+23:                 <span class="ruby-identifier">convert</span> = <span class="ruby-value str">&quot;convert -delay 50 -dispose None -layers optimize&quot;</span>
+24:                 <span class="ruby-keyword kw">for</span> <span class="ruby-identifier">i</span> <span class="ruby-keyword kw">in</span> <span class="ruby-value">0</span><span class="ruby-operator">...</span><span class="ruby-identifier">felder</span>.<span class="ruby-identifier">size</span>
+25:                         <span class="ruby-keyword kw">if</span> <span class="ruby-keyword kw">false</span> <span class="ruby-keyword kw">and</span> <span class="ruby-identifier">i</span><span class="ruby-operator">&gt;</span><span class="ruby-value">0</span>  <span class="ruby-comment cmt"># and i&lt;felder.size-1</span>
+26:                                 <span class="ruby-identifier">convert</span> <span class="ruby-operator">+=</span> <span class="ruby-value str">&quot; -transparent \&quot;rgb(123,123,123)\&quot;&quot;</span>
+27:                         <span class="ruby-keyword kw">end</span>
+28:                         <span class="ruby-identifier">convert</span> <span class="ruby-operator">+=</span> <span class="ruby-node">&quot; #{filename}.ppm&quot;</span>
+29:                         <span class="ruby-identifier">ppm</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">open</span>(<span class="ruby-node">&quot;#{filename}.ppm&quot;</span>, <span class="ruby-value str">&quot;w&quot;</span>)
+30:                         <span class="ruby-identifier">filename</span> = <span class="ruby-identifier">filename</span>.<span class="ruby-identifier">succ</span>
+31:                         <span class="ruby-identifier">ppm</span>.<span class="ruby-identifier">print</span> <span class="ruby-value str">&quot;P6\n40 30 255\n&quot;</span>
+32:                         <span class="ruby-keyword kw">for</span> <span class="ruby-identifier">p</span> <span class="ruby-keyword kw">in</span> <span class="ruby-value">0</span><span class="ruby-operator">...</span><span class="ruby-identifier">felder</span>[<span class="ruby-identifier">i</span>].<span class="ruby-identifier">size</span>
+33:                                 <span class="ruby-identifier">c</span> = <span class="ruby-identifier">felder</span>[<span class="ruby-identifier">i</span>][<span class="ruby-identifier">p</span>].<span class="ruby-identifier">chr</span>
+34:                                 <span class="ruby-keyword kw">if</span> <span class="ruby-keyword kw">false</span> <span class="ruby-keyword kw">and</span> <span class="ruby-identifier">i</span><span class="ruby-operator">&gt;</span><span class="ruby-value">0</span>  <span class="ruby-comment cmt"># and i&lt;felder.size-1</span>
+35:                                         <span class="ruby-identifier">cc</span> = <span class="ruby-identifier">felder</span>[<span class="ruby-identifier">i</span><span class="ruby-operator">-</span><span class="ruby-value">1</span>][<span class="ruby-identifier">p</span>].<span class="ruby-identifier">chr</span>
+36:                                 <span class="ruby-keyword kw">else</span>
+37:                                         <span class="ruby-identifier">cc</span> = <span class="ruby-value str">&quot;9&quot;</span>
+38:                                 <span class="ruby-keyword kw">end</span>
+39:                                 <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">c</span> <span class="ruby-operator">==</span> <span class="ruby-value str">&quot;\n&quot;</span>
+40:                                         <span class="ruby-comment cmt">#        ppm.print &quot;\n&quot;</span>
+41:                                 <span class="ruby-keyword kw">else</span>
+42:                                         <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">c!</span>=<span class="ruby-identifier">cc</span>
+43:                                                 <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">c</span><span class="ruby-operator">==</span> <span class="ruby-value str">&quot;.&quot;</span>
+44:                                                         <span class="ruby-identifier">ppm</span>.<span class="ruby-identifier">print</span> <span class="ruby-identifier">get_bytes</span>(<span class="ruby-identifier">white</span>)
+45:                                                 <span class="ruby-keyword kw">elsif</span> <span class="ruby-identifier">c</span> <span class="ruby-operator">==</span> <span class="ruby-value str">&quot;#&quot;</span> <span class="ruby-keyword kw">or</span> <span class="ruby-identifier">c</span><span class="ruby-operator">==</span><span class="ruby-value str">&quot;*&quot;</span>
+46:                                                         <span class="ruby-identifier">ppm</span>.<span class="ruby-identifier">print</span> <span class="ruby-identifier">get_bytes</span>(<span class="ruby-identifier">black</span>)
+47:                                                 <span class="ruby-keyword kw">elsif</span> <span class="ruby-identifier">c</span>.<span class="ruby-identifier">to_i</span><span class="ruby-operator">&gt;</span><span class="ruby-value">0</span>
+48:                                                         <span class="ruby-identifier">ppm</span>.<span class="ruby-identifier">print</span> <span class="ruby-identifier">get_bytes</span>(<span class="ruby-identifier">colors</span>[<span class="ruby-identifier">strats</span>[<span class="ruby-identifier">c</span>.<span class="ruby-identifier">to_i</span><span class="ruby-operator">-</span><span class="ruby-value">1</span>]])
+49:                                                 <span class="ruby-keyword kw">end</span>
+50:                                         <span class="ruby-keyword kw">else</span>
+51:                                                 <span class="ruby-identifier">ppm</span>.<span class="ruby-identifier">print</span> <span class="ruby-identifier">get_bytes</span>(<span class="ruby-identifier">transp</span>)
+52:                                         <span class="ruby-keyword kw">end</span>
+53:                                 <span class="ruby-keyword kw">end</span>
+54:                         <span class="ruby-keyword kw">end</span>
+55:                         <span class="ruby-identifier">ppm</span>.<span class="ruby-identifier">close</span>
+56:                 <span class="ruby-keyword kw">end</span>
+57:                 <span class="ruby-identifier">convert</span> <span class="ruby-operator">+=</span> <span class="ruby-node">&quot; -loop 0 #{prefix}.gif&quot;</span>
+58:                 <span class="ruby-identifier">pdebug</span> <span class="ruby-identifier">convert</span>
+59:                 <span class="ruby-node">`#{convert}`</span>
+60:                 <span class="ruby-keyword kw">return</span> <span class="ruby-node">&quot;&lt;img width=\&quot;400\&quot; height=\&quot;300\&quot; alt=\&quot;Match #{matchnum}, Schritte #{schritt-10} bis #{schritt}\&quot; src=\&quot;#{prefix}.gif\&quot;&gt;&quot;</span>
+61:         <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
@@ -215,37 +296,37 @@
             onclick="toggleCode('M000096-source');return false;">[Source]</a></p>
           <div class="method-source-code" id="M000096-source">
 <pre>
-    <span class="ruby-comment cmt"># File lib/tournier.rb, line 63</span>
-63:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">match</span>(<span class="ruby-identifier">strategien</span>, <span class="ruby-identifier">perm</span>)
-64:                 <span class="ruby-identifier">pdebug</span> <span class="ruby-node">&quot;Match mit\n#{strategien.join(&quot;,\n&quot;)}&quot;</span>
-65:                 <span class="ruby-identifier">spiel</span> = <span class="ruby-constant">Spiel</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">40</span>, <span class="ruby-value">30</span>, <span class="ruby-identifier">strategien</span>, <span class="ruby-value">0</span>)
-66:                 <span class="ruby-identifier">schritt</span> = <span class="ruby-value">0</span>
-67:                 <span class="ruby-identifier">felder</span> = []
-68:                 <span class="ruby-identifier">lebend</span> = <span class="ruby-constant">Array</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">strategien</span>.<span class="ruby-identifier">size</span>,<span class="ruby-keyword kw">true</span>)
-69:                 <span class="ruby-keyword kw">begin</span>
-70:                         <span class="ruby-identifier">res</span> = <span class="ruby-identifier">spiel</span>.<span class="ruby-identifier">aktualisieren</span>
-71:                         <span class="ruby-identifier">schritt</span> <span class="ruby-operator">+=</span> <span class="ruby-value">1</span>
-72:                         <span class="ruby-identifier">felder</span>.<span class="ruby-identifier">push</span>(<span class="ruby-identifier">spiel</span>.<span class="ruby-identifier">getFeld</span>)
-73:                         <span class="ruby-identifier">felder</span>.<span class="ruby-identifier">shift</span> <span class="ruby-keyword kw">if</span> (<span class="ruby-identifier">felder</span>.<span class="ruby-identifier">size</span><span class="ruby-operator">&gt;</span><span class="ruby-value">10</span>)
-74:                         <span class="ruby-identifier">l</span> = <span class="ruby-value">0</span>
-75:                         <span class="ruby-identifier">res</span>.<span class="ruby-identifier">each_index</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">i</span><span class="ruby-operator">|</span>
-76:                                 <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">res</span>[<span class="ruby-identifier">i</span>] <span class="ruby-operator">!=</span> <span class="ruby-identifier">lebend</span>[<span class="ruby-identifier">i</span>]
-77:                                         <span class="ruby-identifier">$unfaelle</span>[<span class="ruby-identifier">perm</span>[<span class="ruby-identifier">i</span>]] <span class="ruby-operator">+=</span> <span class="ruby-identifier">make_animation</span>(<span class="ruby-identifier">felder</span>, <span class="ruby-identifier">perm</span>, <span class="ruby-identifier">$match_num</span>, <span class="ruby-identifier">schritt</span>)
-78:                                         <span class="ruby-identifier">lebend</span>[<span class="ruby-identifier">i</span>] = <span class="ruby-identifier">res</span>[<span class="ruby-identifier">i</span>]
-79:                                 <span class="ruby-keyword kw">end</span>
-80:                         }
-81:                 <span class="ruby-keyword kw">end</span> <span class="ruby-keyword kw">until</span> <span class="ruby-identifier">schritt</span><span class="ruby-operator">==</span><span class="ruby-value">3000</span> <span class="ruby-keyword kw">or</span> <span class="ruby-identifier">res</span>.<span class="ruby-identifier">index</span>(<span class="ruby-keyword kw">true</span>) <span class="ruby-operator">==</span> <span class="ruby-keyword kw">nil</span> <span class="ruby-keyword kw">or</span> <span class="ruby-identifier">spiel</span>.<span class="ruby-identifier">numapf</span><span class="ruby-operator">==</span><span class="ruby-value">21</span>
-82:                 <span class="ruby-identifier">punkte</span> = <span class="ruby-constant">Array</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">4</span>,<span class="ruby-value">0</span>)
-83:                 <span class="ruby-identifier">strategien</span>.<span class="ruby-identifier">size</span>.<span class="ruby-identifier">times</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">i</span><span class="ruby-operator">|</span>
-84:                         <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">spiel</span>.<span class="ruby-identifier">lebend</span>[<span class="ruby-identifier">i</span>]
-85:                                 <span class="ruby-identifier">punkte</span>[<span class="ruby-identifier">i</span>] = <span class="ruby-identifier">spiel</span>.<span class="ruby-identifier">schlang</span>[<span class="ruby-identifier">i</span>]
-86:                         <span class="ruby-keyword kw">end</span>
-87:                 }
-88:                 <span class="ruby-comment cmt">#pdebug spiel.feld.to_s</span>
-89:                 <span class="ruby-identifier">pdebug</span> <span class="ruby-node">&quot;#{schritt} Spielschritte, Resultat #{punkte.inspect}&quot;</span>
-90:                 <span class="ruby-identifier">$match_num</span> <span class="ruby-operator">+=</span> <span class="ruby-value">1</span>
-91:                 <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">punkte</span>
-92:         <span class="ruby-keyword kw">end</span>
+    <span class="ruby-comment cmt"># File lib/tournier.rb, line 64</span>
+64:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">match</span>(<span class="ruby-identifier">strategien</span>, <span class="ruby-identifier">perm</span>)
+65:                 <span class="ruby-identifier">pdebug</span> <span class="ruby-node">&quot;Match mit\n#{strategien.join(&quot;,\n&quot;)}&quot;</span>
+66:                 <span class="ruby-identifier">spiel</span> = <span class="ruby-constant">Spiel</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">40</span>, <span class="ruby-value">30</span>, <span class="ruby-identifier">strategien</span>, <span class="ruby-value">0</span>)
+67:                 <span class="ruby-identifier">schritt</span> = <span class="ruby-value">0</span>
+68:                 <span class="ruby-identifier">felder</span> = []
+69:                 <span class="ruby-identifier">lebend</span> = <span class="ruby-constant">Array</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">strategien</span>.<span class="ruby-identifier">size</span>,<span class="ruby-keyword kw">true</span>)
+70:                 <span class="ruby-keyword kw">begin</span>
+71:                         <span class="ruby-identifier">res</span> = <span class="ruby-identifier">spiel</span>.<span class="ruby-identifier">aktualisieren</span>
+72:                         <span class="ruby-identifier">schritt</span> <span class="ruby-operator">+=</span> <span class="ruby-value">1</span>
+73:                         <span class="ruby-identifier">felder</span>.<span class="ruby-identifier">push</span>(<span class="ruby-identifier">spiel</span>.<span class="ruby-identifier">getFeld</span>)
+74:                         <span class="ruby-identifier">felder</span>.<span class="ruby-identifier">shift</span> <span class="ruby-keyword kw">if</span> (<span class="ruby-identifier">felder</span>.<span class="ruby-identifier">size</span><span class="ruby-operator">&gt;</span><span class="ruby-value">10</span>)
+75:                         <span class="ruby-identifier">l</span> = <span class="ruby-value">0</span>
+76:                         <span class="ruby-identifier">res</span>.<span class="ruby-identifier">each_index</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">i</span><span class="ruby-operator">|</span>
+77:                                 <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">res</span>[<span class="ruby-identifier">i</span>] <span class="ruby-operator">!=</span> <span class="ruby-identifier">lebend</span>[<span class="ruby-identifier">i</span>]
+78:                                         <span class="ruby-identifier">$unfaelle</span>[<span class="ruby-identifier">perm</span>[<span class="ruby-identifier">i</span>]] <span class="ruby-operator">+=</span> <span class="ruby-identifier">make_animation</span>(<span class="ruby-identifier">felder</span>, <span class="ruby-identifier">perm</span>, <span class="ruby-identifier">$match_num</span>, <span class="ruby-identifier">schritt</span>)
+79:                                         <span class="ruby-identifier">lebend</span>[<span class="ruby-identifier">i</span>] = <span class="ruby-identifier">res</span>[<span class="ruby-identifier">i</span>]
+80:                                 <span class="ruby-keyword kw">end</span>
+81:                         }
+82:                 <span class="ruby-keyword kw">end</span> <span class="ruby-keyword kw">until</span> <span class="ruby-identifier">schritt</span><span class="ruby-operator">==</span><span class="ruby-value">3000</span> <span class="ruby-keyword kw">or</span> <span class="ruby-identifier">res</span>.<span class="ruby-identifier">index</span>(<span class="ruby-keyword kw">true</span>) <span class="ruby-operator">==</span> <span class="ruby-keyword kw">nil</span> <span class="ruby-keyword kw">or</span> <span class="ruby-identifier">spiel</span>.<span class="ruby-identifier">numapf</span><span class="ruby-operator">==</span><span class="ruby-value">21</span>
+83:                 <span class="ruby-identifier">punkte</span> = <span class="ruby-constant">Array</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">4</span>,<span class="ruby-value">0</span>)
+84:                 <span class="ruby-identifier">strategien</span>.<span class="ruby-identifier">size</span>.<span class="ruby-identifier">times</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">i</span><span class="ruby-operator">|</span>
+85:                         <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">spiel</span>.<span class="ruby-identifier">lebend</span>[<span class="ruby-identifier">i</span>]
+86:                                 <span class="ruby-identifier">punkte</span>[<span class="ruby-identifier">i</span>] = <span class="ruby-identifier">spiel</span>.<span class="ruby-identifier">schlang</span>[<span class="ruby-identifier">i</span>]
+87:                         <span class="ruby-keyword kw">end</span>
+88:                 }
+89:                 <span class="ruby-comment cmt">#pdebug spiel.feld.to_s</span>
+90:                 <span class="ruby-identifier">pdebug</span> <span class="ruby-node">&quot;#{schritt} Spielschritte, Resultat #{punkte.inspect}&quot;</span>
+91:                 <span class="ruby-identifier">$match_num</span> <span class="ruby-operator">+=</span> <span class="ruby-value">1</span>
+92:                 <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">punkte</span>
+93:         <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
@@ -268,20 +349,20 @@ fragt den User nach den Strategien, die mitmachen sollen
             onclick="toggleCode('M000098-source');return false;">[Source]</a></p>
           <div class="method-source-code" id="M000098-source">
 <pre>
-     <span class="ruby-comment cmt"># File lib/tournier.rb, line 125</span>
-125:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">strategieabfrage</span>(<span class="ruby-identifier">strategien</span>)
-126:                 <span class="ruby-identifier">pdebug</span> <span class="ruby-value str">&quot;Folgende Strategien stehen zur Verfügung:&quot;</span>
-127:                 <span class="ruby-identifier">strategien</span>.<span class="ruby-identifier">each_index</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">i</span><span class="ruby-operator">|</span>
-128:                         <span class="ruby-identifier">pdebug</span> <span class="ruby-identifier">i</span>.<span class="ruby-identifier">to_s</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">strategien</span>[<span class="ruby-identifier">i</span>].<span class="ruby-identifier">to_s</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;\n&quot;</span>
-129:                 }
-130:                 <span class="ruby-identifier">pdebug</span> <span class="ruby-value str">&quot;Bitte die Nummern aller Teilnehmer durch Whitespaces getrennt angeben, mindestens 4:&quot;</span>
-131:                 <span class="ruby-identifier">string</span> = <span class="ruby-identifier">gets</span>.<span class="ruby-identifier">chomp</span>
-132:                 <span class="ruby-identifier">selected</span> = <span class="ruby-constant">Array</span>.<span class="ruby-identifier">new</span>
-133:                 <span class="ruby-identifier">string</span>.<span class="ruby-identifier">split</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">number</span><span class="ruby-operator">|</span> 
-134:                         <span class="ruby-identifier">selected</span>.<span class="ruby-identifier">push</span>(<span class="ruby-identifier">strategien</span>[<span class="ruby-identifier">number</span>.<span class="ruby-identifier">to_i</span>])
-135:                 }
-136:                 <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">selected</span>
-137:         <span class="ruby-keyword kw">end</span>
+     <span class="ruby-comment cmt"># File lib/tournier.rb, line 126</span>
+126:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">strategieabfrage</span>(<span class="ruby-identifier">strategien</span>)
+127:                 <span class="ruby-identifier">pdebug</span> <span class="ruby-value str">&quot;Folgende Strategien stehen zur Verfügung:&quot;</span>
+128:                 <span class="ruby-identifier">strategien</span>.<span class="ruby-identifier">each_index</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">i</span><span class="ruby-operator">|</span>
+129:                         <span class="ruby-identifier">pdebug</span> <span class="ruby-identifier">i</span>.<span class="ruby-identifier">to_s</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">strategien</span>[<span class="ruby-identifier">i</span>].<span class="ruby-identifier">to_s</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;\n&quot;</span>
+130:                 }
+131:                 <span class="ruby-identifier">pdebug</span> <span class="ruby-value str">&quot;Bitte die Nummern aller Teilnehmer durch Whitespaces getrennt angeben, mindestens 4:&quot;</span>
+132:                 <span class="ruby-identifier">string</span> = <span class="ruby-identifier">gets</span>.<span class="ruby-identifier">chomp</span>
+133:                 <span class="ruby-identifier">selected</span> = <span class="ruby-constant">Array</span>.<span class="ruby-identifier">new</span>
+134:                 <span class="ruby-identifier">string</span>.<span class="ruby-identifier">split</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">number</span><span class="ruby-operator">|</span> 
+135:                         <span class="ruby-identifier">selected</span>.<span class="ruby-identifier">push</span>(<span class="ruby-identifier">strategien</span>[<span class="ruby-identifier">number</span>.<span class="ruby-identifier">to_i</span>])
+136:                 }
+137:                 <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">selected</span>
+138:         <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
@@ -301,36 +382,36 @@ fragt den User nach den Strategien, die mitmachen sollen
             onclick="toggleCode('M000097-source');return false;">[Source]</a></p>
           <div class="method-source-code" id="M000097-source">
 <pre>
-     <span class="ruby-comment cmt"># File lib/tournier.rb, line 94</span>
- 94:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">write_unfaelle</span>(<span class="ruby-identifier">strats</span>, <span class="ruby-identifier">punkte</span>, <span class="ruby-identifier">punktequadrate</span>, <span class="ruby-identifier">punkte_n</span>)
- 95:                 <span class="ruby-identifier">colors</span> = [<span class="ruby-value str">&quot;255 0 0&quot;</span>, <span class="ruby-value str">&quot;0 255 0&quot;</span>, <span class="ruby-value str">&quot;0 0 255&quot;</span>, 
- 96:                                                 <span class="ruby-value str">&quot;200 200 0&quot;</span>, <span class="ruby-value str">&quot;0 200 200&quot;</span>, <span class="ruby-value str">&quot;200 0 200&quot;</span>,
- 97:                                                 <span class="ruby-value str">&quot;100 100 100&quot;</span>,<span class="ruby-value str">&quot;100 0 0&quot;</span>, <span class="ruby-value str">&quot;0 100 0&quot;</span>, <span class="ruby-value str">&quot;0 0 100&quot;</span>]
- 98: 
- 99:                 <span class="ruby-identifier">legende</span> = <span class="ruby-value str">&quot;&lt;ul&gt;\n&quot;</span>
-100:                 <span class="ruby-identifier">strats</span>.<span class="ruby-identifier">each_index</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">i</span><span class="ruby-operator">|</span>
-101:                         <span class="ruby-identifier">color</span> = <span class="ruby-identifier">colors</span>[<span class="ruby-identifier">i</span>].<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp re">/ /</span>,<span class="ruby-value str">&quot;,&quot;</span>)
-102:                         <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">punkte_n</span>[<span class="ruby-identifier">i</span>]<span class="ruby-operator">&gt;</span><span class="ruby-value">1</span>
-103:                                 <span class="ruby-identifier">s</span> = <span class="ruby-constant">Math</span><span class="ruby-operator">::</span><span class="ruby-identifier">sqrt</span>(<span class="ruby-value">1.0</span><span class="ruby-operator">/</span>(<span class="ruby-identifier">punkte_n</span>[<span class="ruby-identifier">i</span>]<span class="ruby-operator">-</span><span class="ruby-value">1</span>)<span class="ruby-operator">*</span>(<span class="ruby-identifier">punktequadrate</span>[<span class="ruby-identifier">i</span>]<span class="ruby-operator">-</span><span class="ruby-value">1.0</span><span class="ruby-operator">/</span><span class="ruby-identifier">punkte_n</span>[<span class="ruby-identifier">i</span>]<span class="ruby-operator">*</span><span class="ruby-identifier">punkte</span>[<span class="ruby-identifier">i</span>]))
-104:                                 <span class="ruby-identifier">s</span> = (<span class="ruby-identifier">s</span><span class="ruby-operator">*</span><span class="ruby-constant">Math</span><span class="ruby-operator">::</span><span class="ruby-identifier">sqrt</span>(<span class="ruby-identifier">punkte_n</span>[<span class="ruby-identifier">i</span>])).<span class="ruby-identifier">to_i</span>
-105:                                 <span class="ruby-identifier">intervall</span> = <span class="ruby-node">&quot;[#{punkte[i]-s},#{punkte[i]+s}]&quot;</span>
-106:                         <span class="ruby-keyword kw">else</span>
-107:                                 <span class="ruby-identifier">intervall</span> = <span class="ruby-value str">&quot;&quot;</span>
-108:                         <span class="ruby-keyword kw">end</span>
-109:                         <span class="ruby-identifier">legende</span> <span class="ruby-operator">+=</span> <span class="ruby-node">&quot;&lt;li&gt;&lt;a href=\&quot;#{strats[i].to_s}.html\&quot; style=\&quot;color:rgb(#{color});\&quot;&gt;#{strats[i].to_s} (#{punkte[i]} Punkte)  68%-Konfidenzintervall: #{intervall}&lt;/a&gt;&lt;/li&gt;\n&quot;</span>
-110:                 }
-111:                 <span class="ruby-identifier">legende</span> <span class="ruby-operator">+=</span> <span class="ruby-value str">&quot;&lt;/ul&gt;\n&quot;</span>
-112:                 <span class="ruby-identifier">strats</span>.<span class="ruby-identifier">each_index</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">i</span><span class="ruby-operator">|</span>
-113:                         <span class="ruby-identifier">s</span> = <span class="ruby-identifier">strats</span>[<span class="ruby-identifier">i</span>].<span class="ruby-identifier">to_s</span>
-114:                         <span class="ruby-identifier">color</span> = <span class="ruby-identifier">colors</span>[<span class="ruby-identifier">i</span>].<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp re">/ /</span>,<span class="ruby-value str">&quot;,&quot;</span>)
-115:                         <span class="ruby-identifier">html</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">open</span>(<span class="ruby-node">&quot;output/#{s}.html&quot;</span>,<span class="ruby-value str">&quot;w&quot;</span>)
-116:                         <span class="ruby-identifier">html</span>.<span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;&lt;html&gt;&lt;head&gt;&lt;title&gt;Always look on the bright side of death...&lt;/title&gt;&lt;/head&gt;&lt;body&gt;&lt;h1 style=\&quot;color:rgb(#{color});\&quot;&gt;#{s}&lt;/h1&gt;&quot;</span>
-117:                         <span class="ruby-identifier">html</span>.<span class="ruby-identifier">puts</span> <span class="ruby-identifier">legende</span>
-118:                         <span class="ruby-identifier">html</span>.<span class="ruby-identifier">puts</span> <span class="ruby-identifier">$unfaelle</span>[<span class="ruby-identifier">i</span>]
-119:                         <span class="ruby-identifier">html</span>.<span class="ruby-identifier">puts</span> <span class="ruby-value str">&quot;&lt;/body&gt;&lt;/html&gt;&quot;</span>
-120:                         <span class="ruby-identifier">html</span>.<span class="ruby-identifier">close</span>
-121:                 }
-122:         <span class="ruby-keyword kw">end</span>
+     <span class="ruby-comment cmt"># File lib/tournier.rb, line 95</span>
+ 95:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">write_unfaelle</span>(<span class="ruby-identifier">strats</span>, <span class="ruby-identifier">punkte</span>, <span class="ruby-identifier">punktequadrate</span>, <span class="ruby-identifier">punkte_n</span>)
+ 96:                 <span class="ruby-identifier">colors</span> = [<span class="ruby-value str">&quot;255 0 0&quot;</span>, <span class="ruby-value str">&quot;0 255 0&quot;</span>, <span class="ruby-value str">&quot;0 0 255&quot;</span>, 
+ 97:                                                 <span class="ruby-value str">&quot;200 200 0&quot;</span>, <span class="ruby-value str">&quot;0 200 200&quot;</span>, <span class="ruby-value str">&quot;200 0 200&quot;</span>,
+ 98:                                                 <span class="ruby-value str">&quot;100 100 100&quot;</span>,<span class="ruby-value str">&quot;100 0 0&quot;</span>, <span class="ruby-value str">&quot;0 100 0&quot;</span>, <span class="ruby-value str">&quot;0 0 100&quot;</span>]
+ 99: 
+100:                 <span class="ruby-identifier">legende</span> = <span class="ruby-value str">&quot;&lt;ul&gt;\n&quot;</span>
+101:                 <span class="ruby-identifier">strats</span>.<span class="ruby-identifier">each_index</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">i</span><span class="ruby-operator">|</span>
+102:                         <span class="ruby-identifier">color</span> = <span class="ruby-identifier">colors</span>[<span class="ruby-identifier">i</span>].<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp re">/ /</span>,<span class="ruby-value str">&quot;,&quot;</span>)
+103:                         <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">punkte_n</span>[<span class="ruby-identifier">i</span>]<span class="ruby-operator">&gt;</span><span class="ruby-value">1</span>
+104:                                 <span class="ruby-identifier">s</span> = <span class="ruby-constant">Math</span><span class="ruby-operator">::</span><span class="ruby-identifier">sqrt</span>(<span class="ruby-value">1.0</span><span class="ruby-operator">/</span>(<span class="ruby-identifier">punkte_n</span>[<span class="ruby-identifier">i</span>]<span class="ruby-operator">-</span><span class="ruby-value">1</span>)<span class="ruby-operator">*</span>(<span class="ruby-identifier">punktequadrate</span>[<span class="ruby-identifier">i</span>]<span class="ruby-operator">-</span><span class="ruby-value">1.0</span><span class="ruby-operator">/</span><span class="ruby-identifier">punkte_n</span>[<span class="ruby-identifier">i</span>]<span class="ruby-operator">*</span><span class="ruby-identifier">punkte</span>[<span class="ruby-identifier">i</span>]))
+105:                                 <span class="ruby-identifier">s</span> = (<span class="ruby-identifier">s</span><span class="ruby-operator">*</span><span class="ruby-constant">Math</span><span class="ruby-operator">::</span><span class="ruby-identifier">sqrt</span>(<span class="ruby-identifier">punkte_n</span>[<span class="ruby-identifier">i</span>])).<span class="ruby-identifier">to_i</span>
+106:                                 <span class="ruby-identifier">intervall</span> = <span class="ruby-node">&quot;[#{punkte[i]-s},#{punkte[i]+s}]&quot;</span>
+107:                         <span class="ruby-keyword kw">else</span>
+108:                                 <span class="ruby-identifier">intervall</span> = <span class="ruby-value str">&quot;&quot;</span>
+109:                         <span class="ruby-keyword kw">end</span>
+110:                         <span class="ruby-identifier">legende</span> <span class="ruby-operator">+=</span> <span class="ruby-node">&quot;&lt;li&gt;&lt;a href=\&quot;#{strats[i].to_s}.html\&quot; style=\&quot;color:rgb(#{color});\&quot;&gt;#{strats[i].to_s} (#{punkte[i]} Punkte)  68%-Konfidenzintervall: #{intervall}&lt;/a&gt;&lt;/li&gt;\n&quot;</span>
+111:                 }
+112:                 <span class="ruby-identifier">legende</span> <span class="ruby-operator">+=</span> <span class="ruby-value str">&quot;&lt;/ul&gt;\n&quot;</span>
+113:                 <span class="ruby-identifier">strats</span>.<span class="ruby-identifier">each_index</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">i</span><span class="ruby-operator">|</span>
+114:                         <span class="ruby-identifier">s</span> = <span class="ruby-identifier">strats</span>[<span class="ruby-identifier">i</span>].<span class="ruby-identifier">to_s</span>
+115:                         <span class="ruby-identifier">color</span> = <span class="ruby-identifier">colors</span>[<span class="ruby-identifier">i</span>].<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp re">/ /</span>,<span class="ruby-value str">&quot;,&quot;</span>)
+116:                         <span class="ruby-identifier">html</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">open</span>(<span class="ruby-node">&quot;#{s}.html&quot;</span>,<span class="ruby-value str">&quot;w&quot;</span>)
+117:                         <span class="ruby-identifier">html</span>.<span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;&lt;html&gt;&lt;head&gt;&lt;title&gt;Always look on the bright side of death...&lt;/title&gt;&lt;/head&gt;&lt;body&gt;&lt;h1 style=\&quot;color:rgb(#{color});\&quot;&gt;#{s}&lt;/h1&gt;&quot;</span>
+118:                         <span class="ruby-identifier">html</span>.<span class="ruby-identifier">puts</span> <span class="ruby-identifier">legende</span>
+119:                         <span class="ruby-identifier">html</span>.<span class="ruby-identifier">puts</span> <span class="ruby-identifier">$unfaelle</span>[<span class="ruby-identifier">i</span>]
+120:                         <span class="ruby-identifier">html</span>.<span class="ruby-identifier">puts</span> <span class="ruby-value str">&quot;&lt;/body&gt;&lt;/html&gt;&quot;</span>
+121:                         <span class="ruby-identifier">html</span>.<span class="ruby-identifier">close</span>
+122:                 }
+123:         <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
