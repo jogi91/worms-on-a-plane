@@ -25,8 +25,8 @@ module Tournier
 			if false and i>0  # and i<felder.size-1
 				convert += " -transparent \"rgb(123,123,123)\""
 			end
-			convert += " output/#{filename}.ppm"
-			ppm = File.open("output/#{filename}.ppm", "w")
+			convert += " #{filename}.ppm"
+			ppm = File.open("#{filename}.ppm", "w")
 			filename = filename.succ
 			ppm.print "P6\n40 30 255\n"
 			for p in 0...felder[i].size
@@ -54,7 +54,7 @@ module Tournier
 			end
 			ppm.close
 		end
-		convert += " -loop 0 output/#{prefix}.gif"
+		convert += " -loop 0 #{prefix}.gif"
 		pdebug convert
 		`#{convert}`
 		return "<img width=\"400\" height=\"300\" alt=\"Match #{matchnum}, Schritte #{schritt-10} bis #{schritt}\" src=\"#{prefix}.gif\">"
@@ -113,7 +113,7 @@ module Tournier
 		strats.each_index {|i|
 			s = strats[i].to_s
 			color = colors[i].gsub(/ /,",")
-			html = File.open("output/#{s}.html","w")
+			html = File.open("#{s}.html","w")
 			html.puts "<html><head><title>Always look on the bright side of death...</title></head><body><h1 style=\"color:rgb(#{color});\">#{s}</h1>"
 			html.puts legende
 			html.puts $unfaelle[i]
@@ -138,7 +138,7 @@ module Tournier
 	end
 
 	#spielt ein Turnier komplett durch
-	def berechneTurnier (includeDir)
+	def berechneTurnier (includeDir, outputDir)
 		$match_num = 0
 
 		#wo wurde das Skript gestartet?
@@ -154,6 +154,8 @@ module Tournier
 
 		#und  zurück
 		Dir.chdir(startort)
+		#output setzen
+		Dir.chdir(outputDir)
 
 		# Damit erhalten wir die Klassen aller Strategie-Objekte.
 		allestrategien = Module.constants.grep(/^Strategie./).sort.collect{|s| Kernel.const_get(s)}
@@ -188,5 +190,9 @@ module Tournier
 			}
 			write_unfaelle(gewaehltestrategien, punkte, punktequadrate, punkte_n)
 		}
+
+
+		#wieder zurück an den anfang
+		Dir.chdir(startort)
 	end
 end

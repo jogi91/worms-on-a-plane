@@ -40,4 +40,4 @@ include Tournier
 # bringt die Schlangen zum Schweigen
 require "kernel"
 
-berechneTurnier(includeDir)
+berechneTurnier(includeDir, outputDir)
